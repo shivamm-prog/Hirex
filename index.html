@@ -1,448 +1,448 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hirex • Events & Opportunities</title>
-    <meta
-      name="description"
-      content="Hirex — Explore hackathons, workshops, seminars, jobs, internships, and freelance opportunities. Register/apply with simulated payments, receipts, and reviews."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#app">Skip to content</a>
 
-    <header class="topbar" id="topbar">
-      <div class="container topbar__inner">
-        <div class="brand" role="banner" aria-label="Hirex">
-          <div class="brand__mark" aria-hidden="true">H</div>
-          <div class="brand__text">
-            <div class="brand__name">Hirex</div>
-            <div class="brand__tag">Events & Opportunities</div>
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hirex • Events & Opportunities</title>
+  <meta name="description"
+    content="Hirex — Explore hackathons, workshops, seminars, jobs, internships, and freelance opportunities. Register/apply with simulated payments, receipts, and reviews." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
 
-        <div class="topbar__actions" aria-label="User actions">
-          <button id="openNotifications" class="icon-btn" type="button" aria-label="Notifications">
-            <span aria-hidden="true">🔔</span>
-          </button>
-          <button id="openProfile" class="icon-btn" type="button" aria-label="Profile">
-            <span aria-hidden="true">👤</span>
-          </button>
+<body>
+  <a class="skip-link" href="#app">Skip to content</a>
+
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <div class="brand" role="banner" aria-label="Hirex">
+        <div class="brand__mark" aria-hidden="true">H</div>
+        <div class="brand__text">
+          <div class="brand__name">Hirex</div>
+          <div class="brand__tag">Events & Opportunities</div>
         </div>
       </div>
-    </header>
 
-    <div class="app-shell" id="appShell">
-      <aside class="sidebar-primary" aria-label="Main areas">
-        <div class="sidebar-primary__brand">
-          <span class="sidebar-primary__mark" aria-hidden="true">H</span>
-          <span class="sidebar-primary__title">Hirex</span>
+      <div class="topbar__actions" aria-label="User actions">
+        <button id="openNotifications" class="icon-btn" type="button" aria-label="Notifications">
+          <span aria-hidden="true">🔔</span>
+        </button>
+        <button id="openProfile" class="icon-btn" type="button" aria-label="Profile">
+          <span aria-hidden="true">👤</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar-primary" aria-label="Main areas">
+      <div class="sidebar-primary__brand">
+        <span class="sidebar-primary__mark" aria-hidden="true">H</span>
+        <span class="sidebar-primary__title">Hirex</span>
+      </div>
+      <p class="sidebar-primary__hint">Choose a workspace</p>
+      <nav class="sidebar-primary__nav" aria-label="Network or events">
+        <button class="navlink sidebar-navlink" data-route="networking" type="button">
+          <span class="sidebar-navlink__icon" aria-hidden="true">◇</span>
+          <span class="sidebar-navlink__text">
+            <span class="sidebar-navlink__label">Network</span>
+            <span class="sidebar-navlink__sub">Profiles, feed & connections</span>
+          </span>
+        </button>
+        <button class="navlink sidebar-navlink is-active" data-route="home" type="button">
+          <span class="sidebar-navlink__icon" aria-hidden="true">◎</span>
+          <span class="sidebar-navlink__text">
+            <span class="sidebar-navlink__label">Events & Opportunities</span>
+            <span class="sidebar-navlink__sub">Hackathons, jobs & more</span>
+          </span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="app-main-wrap" id="appMainWrap">
+      <div class="pillstrip" id="eventsPillstrip">
+        <div class="container pillstrip__inner">
+          <div class="pillbar" role="group" aria-label="Filter type">
+            <button class="pill is-active" data-filter-scope="all" type="button">All</button>
+            <button class="pill" data-filter-scope="events" type="button">Events</button>
+            <button class="pill" data-filter-scope="opps" type="button">Opportunities</button>
+          </div>
+
+          <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
         </div>
-        <p class="sidebar-primary__hint">Choose a workspace</p>
-        <nav class="sidebar-primary__nav" aria-label="Network or events">
-          <button class="navlink sidebar-navlink" data-route="networking" type="button">
-            <span class="sidebar-navlink__icon" aria-hidden="true">◇</span>
-            <span class="sidebar-navlink__text">
-              <span class="sidebar-navlink__label">Network</span>
-              <span class="sidebar-navlink__sub">Profiles, feed & connections</span>
-            </span>
-          </button>
-          <button class="navlink sidebar-navlink is-active" data-route="home" type="button">
-            <span class="sidebar-navlink__icon" aria-hidden="true">◎</span>
-            <span class="sidebar-navlink__text">
-              <span class="sidebar-navlink__label">Events & Opportunities</span>
-              <span class="sidebar-navlink__sub">Hackathons, jobs & more</span>
-            </span>
-          </button>
-        </nav>
-      </aside>
+      </div>
 
-      <div class="app-main-wrap" id="appMainWrap">
-        <div class="pillstrip" id="eventsPillstrip">
-          <div class="container pillstrip__inner">
-            <div class="pillbar" role="group" aria-label="Filter type">
-              <button class="pill is-active" data-filter-scope="all" type="button">All</button>
-              <button class="pill" data-filter-scope="events" type="button">Events</button>
-              <button class="pill" data-filter-scope="opps" type="button">Opportunities</button>
-            </div>
+      <main id="app" class="app" tabindex="-1">
+        <div class="container" id="appContainer">
+          <section class="hero hero--home" aria-label="Hirex homepage hero">
+            <div class="hero__inner">
+              <h1 class="hero__title">Discover Events & Opportunities That Shape Your Career</h1>
+              <p class="hero__subtitle">Hackathons, Jobs, Internships, Workshops & more in one platform</p>
 
-            <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
-          </div>
-        </div>
-
-        <main id="app" class="app" tabindex="-1">
-          <div class="container" id="appContainer">
-        <section class="hero hero--home" aria-label="Hirex homepage hero">
-          <div class="hero__inner">
-            <h1 class="hero__title">Discover Events & Opportunities That Shape Your Career</h1>
-            <p class="hero__subtitle">Hackathons, Jobs, Internships, Workshops & more in one platform</p>
-
-            <div class="hero__search">
-              <div class="search search--hero">
-                <span class="search__icon" aria-hidden="true">⌕</span>
-                <input
-                  id="globalSearch"
-                  class="search__input"
-                  type="search"
-                  placeholder="Search events and opportunities…"
-                  autocomplete="off"
-                />
-              </div>
-            </div>
-
-            <div class="hero__cta hero__cta--center">
-              <button id="goUpcoming" class="btn btn--primary" type="button">Explore Events</button>
-              <button id="goOpportunities" class="btn btn--secondary" type="button">Browse Opportunities</button>
-            </div>
-
-            <div class="hero__stats">
-              <div class="stat">
-                <div class="stat__label">This week</div>
-                <div class="stat__value" id="statWeek">—</div>
-                <div class="stat__hint">new listings</div>
-              </div>
-              <div class="stat">
-                <div class="stat__label">Registered</div>
-                <div class="stat__value" id="statRegistered">—</div>
-                <div class="stat__hint">events & apps</div>
-              </div>
-              <div class="stat">
-                <div class="stat__label">Trust</div>
-                <div class="stat__value" id="statTrust">—</div>
-                <div class="stat__hint">avg. score</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="homeEnhancements" class="home-plus" aria-label="Homepage highlights">
-          <div class="ticker">
-            <div class="ticker__label">Trending</div>
-            <div class="ticker__track">
-              <div id="trendTicker" class="ticker__text">Loading top opportunities and events…</div>
-            </div>
-          </div>
-
-          <div class="wow-grid">
-            <article class="wow-card wow-card--accent">
-              <div class="wow-card__kicker">Launch your career faster</div>
-              <h3 class="wow-card__title">Everything students and early professionals need in one platform</h3>
-              <p class="wow-card__text">
-                Explore competitive hackathons, practical workshops, and curated opportunities with transparent trust scores,
-                salary bands, and smoother apply flows.
-              </p>
-              <div class="wow-card__actions">
-                <button class="btn btn--primary" data-quick-route="events" type="button">Join a Hackathon</button>
-                <button class="btn btn--secondary" data-quick-route="opportunities" type="button">Explore Jobs</button>
-              </div>
-            </article>
-
-            <article class="wow-card">
-              <div class="wow-card__kicker">Live platform pulse</div>
-              <div class="pulse">
-                <div class="pulse__item">
-                  <div class="pulse__label">Paid events</div>
-                  <div id="pulsePaid" class="pulse__value">—</div>
-                </div>
-                <div class="pulse__item">
-                  <div class="pulse__label">Free listings</div>
-                  <div id="pulseFree" class="pulse__value">—</div>
-                </div>
-                <div class="pulse__item">
-                  <div class="pulse__label">Open jobs</div>
-                  <div id="pulseJobs" class="pulse__value">—</div>
+              <div class="hero__search">
+                <div class="search search--hero">
+                  <span class="search__icon" aria-hidden="true">⌕</span>
+                  <input id="globalSearch" class="search__input" type="search"
+                    placeholder="Search events and opportunities…" autocomplete="off" />
                 </div>
               </div>
-              <div class="wow-card__tags">
-                <span class="badge badge--verified">Verified-first discovery</span>
-                <span class="badge badge--trust">Trust-driven ranking</span>
-              </div>
-            </article>
-          </div>
 
-          <section class="spotlight">
-            <div class="spotlight__head">
-              <div>
-                <h3 class="spotlight__title">Spotlight Picks</h3>
-                <p class="spotlight__sub">High-trust picks inspired by top career platforms, tailored for your flow.</p>
+              <div class="hero__cta hero__cta--center">
+                <button id="goUpcoming" class="btn btn--primary" type="button">Explore Events</button>
+                <button id="goOpportunities" class="btn btn--secondary" type="button">Browse Opportunities</button>
+              </div>
+
+              <div class="hero__stats">
+                <div class="stat">
+                  <div class="stat__label">This week</div>
+                  <div class="stat__value" id="statWeek">—</div>
+                  <div class="stat__hint">new listings</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__label">Registered</div>
+                  <div class="stat__value" id="statRegistered">—</div>
+                  <div class="stat__hint">events & apps</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__label">Trust</div>
+                  <div class="stat__value" id="statTrust">—</div>
+                  <div class="stat__hint">avg. score</div>
+                </div>
               </div>
             </div>
-            <div id="spotlightRow" class="spotlight__row"></div>
           </section>
-        </section>
 
-        <section class="content">
-          <div class="content__header">
-            <div>
-              <h2 id="pageTitle" class="content__title">Home</h2>
-              <p id="pageSubtitle" class="content__subtitle">Upcoming items, your registrations, and smart suggestions.</p>
+          <section id="homeEnhancements" class="home-plus" aria-label="Homepage highlights">
+            <div class="ticker">
+              <div class="ticker__label">Trending</div>
+              <div class="ticker__track">
+                <div id="trendTicker" class="ticker__text">Loading top opportunities and events…</div>
+              </div>
             </div>
 
-            <div class="content__controls">
-              <div class="select">
-                <label class="sr-only" for="sortBy">Sort</label>
-                <select id="sortBy">
-                  <option value="recommended">Recommended</option>
-                  <option value="soonest">Soonest</option>
-                  <option value="trust">Highest trust</option>
-                  <option value="feeLow">Fee: low to high</option>
-                </select>
-              </div>
-              <button id="clearFilters" class="btn btn--ghost" type="button">Reset</button>
-            </div>
-          </div>
-
-          <div class="grid">
-            <aside class="filters" aria-label="Filters">
-              <div class="panel">
-                <div class="panel__title">Quick filters</div>
-                <div class="chips" id="chipRow"></div>
-              </div>
-
-              <div class="panel">
-                <div class="panel__title">Mode</div>
-                <div class="seg" role="group" aria-label="Online or offline">
-                  <button class="seg__btn" data-mode="any" type="button">Any</button>
-                  <button class="seg__btn" data-mode="online" type="button">Online</button>
-                  <button class="seg__btn" data-mode="offline" type="button">Offline</button>
-                </div>
-              </div>
-
-              <div class="panel">
-                <div class="panel__title">Pricing</div>
-                <div class="seg" role="group" aria-label="Free or paid">
-                  <button class="seg__btn" data-price="any" type="button">Any</button>
-                  <button class="seg__btn" data-price="free" type="button">Free</button>
-                  <button class="seg__btn" data-price="paid" type="button">Paid</button>
-                </div>
-              </div>
-
-              <div class="panel">
-                <div class="panel__title">Verified</div>
-                <label class="check">
-                  <input id="onlyVerified" type="checkbox" />
-                  <span>Show verified only</span>
-                </label>
-              </div>
-
-              <div class="panel">
-                <div class="panel__title">Domain</div>
-                <div class="field">
-                  <label class="sr-only" for="domain">Domain</label>
-                  <input id="domain" type="text" placeholder="e.g. AI, Web, Data" />
-                </div>
-              </div>
-
-              <div class="panel panel--soft">
-                <div class="panel__title">Payment & refunds</div>
-                <p class="muted">
-                  Refunds are allowed only until the event starts. Organizer cancellations trigger full refunds and clearly
-                  display status on your registration.
+            <div class="wow-grid">
+              <article class="wow-card wow-card--accent">
+                <div class="wow-card__kicker">Launch your career faster</div>
+                <h3 class="wow-card__title">Everything students and early professionals need in one platform</h3>
+                <p class="wow-card__text">
+                  Explore competitive hackathons, practical workshops, and curated opportunities with transparent trust
+                  scores,
+                  salary bands, and smoother apply flows.
                 </p>
-              </div>
-            </aside>
+                <div class="wow-card__actions">
+                  <button class="btn btn--primary" data-quick-route="events" type="button">Join a Hackathon</button>
+                  <button class="btn btn--secondary" data-quick-route="opportunities" type="button">Explore
+                    Jobs</button>
+                </div>
+              </article>
 
-            <section class="results" aria-label="Listings">
-              <div id="sectionHome" class="stack"></div>
-              <div id="sectionList" class="stack is-hidden"></div>
-              <div id="sectionNetworking" class="stack is-hidden"></div>
+              <article class="wow-card">
+                <div class="wow-card__kicker">Live platform pulse</div>
+                <div class="pulse">
+                  <div class="pulse__item">
+                    <div class="pulse__label">Paid events</div>
+                    <div id="pulsePaid" class="pulse__value">—</div>
+                  </div>
+                  <div class="pulse__item">
+                    <div class="pulse__label">Free listings</div>
+                    <div id="pulseFree" class="pulse__value">—</div>
+                  </div>
+                  <div class="pulse__item">
+                    <div class="pulse__label">Open jobs</div>
+                    <div id="pulseJobs" class="pulse__value">—</div>
+                  </div>
+                </div>
+                <div class="wow-card__tags">
+                  <span class="badge badge--verified">Verified-first discovery</span>
+                  <span class="badge badge--trust">Trust-driven ranking</span>
+                </div>
+              </article>
+            </div>
+
+            <section class="spotlight">
+              <div class="spotlight__head">
+                <div>
+                  <h3 class="spotlight__title">Spotlight Picks</h3>
+                  <p class="spotlight__sub">High-trust picks inspired by top career platforms, tailored for your flow.
+                  </p>
+                </div>
+              </div>
+              <div id="spotlightRow" class="spotlight__row"></div>
             </section>
-          </div>
-        </section>
-          </div>
-        </main>
+          </section>
+
+          <section class="content">
+            <div class="content__header">
+              <div>
+                <h2 id="pageTitle" class="content__title">Home</h2>
+                <p id="pageSubtitle" class="content__subtitle">Upcoming items, your registrations, and smart
+                  suggestions.</p>
+              </div>
+
+              <div class="content__controls">
+                <div class="select">
+                  <label class="sr-only" for="sortBy">Sort</label>
+                  <select id="sortBy">
+                    <option value="recommended">Recommended</option>
+                    <option value="soonest">Soonest</option>
+                    <option value="trust">Highest trust</option>
+                    <option value="feeLow">Fee: low to high</option>
+                  </select>
+                </div>
+                <button id="clearFilters" class="btn btn--ghost" type="button">Reset</button>
+              </div>
+            </div>
+
+            <div class="grid">
+              <aside class="filters" aria-label="Filters">
+                <div class="panel">
+                  <div class="panel__title">Quick filters</div>
+                  <div class="chips" id="chipRow"></div>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__title">Mode</div>
+                  <div class="seg" role="group" aria-label="Online or offline">
+                    <button class="seg__btn" data-mode="any" type="button">Any</button>
+                    <button class="seg__btn" data-mode="online" type="button">Online</button>
+                    <button class="seg__btn" data-mode="offline" type="button">Offline</button>
+                  </div>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__title">Pricing</div>
+                  <div class="seg" role="group" aria-label="Free or paid">
+                    <button class="seg__btn" data-price="any" type="button">Any</button>
+                    <button class="seg__btn" data-price="free" type="button">Free</button>
+                    <button class="seg__btn" data-price="paid" type="button">Paid</button>
+                  </div>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__title">Verified</div>
+                  <label class="check">
+                    <input id="onlyVerified" type="checkbox" />
+                    <span>Show verified only</span>
+                  </label>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__title">Domain</div>
+                  <div class="field">
+                    <label class="sr-only" for="domain">Domain</label>
+                    <input id="domain" type="text" placeholder="e.g. AI, Web, Data" />
+                  </div>
+                </div>
+
+                <div class="panel panel--soft">
+                  <div class="panel__title">Payment & refunds</div>
+                  <p class="muted">
+                    Refunds are allowed only until the event starts. Organizer cancellations trigger full refunds and
+                    clearly
+                    display status on your registration.
+                  </p>
+                </div>
+              </aside>
+
+              <section class="results" aria-label="Listings">
+                <div id="sectionHome" class="stack"></div>
+                <div id="sectionList" class="stack is-hidden"></div>
+                <div id="sectionNetworking" class="stack is-hidden"></div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Details Drawer -->
+  <div id="drawerOverlay" class="overlay is-hidden" aria-hidden="true"></div>
+  <aside id="detailsDrawer" class="drawer is-hidden" aria-label="Details" aria-hidden="true">
+    <div class="drawer__header">
+      <button id="closeDrawer" class="icon-btn" type="button" aria-label="Close details">✕</button>
+      <div class="drawer__headings">
+        <div id="drawerKicker" class="drawer__kicker">—</div>
+        <div id="drawerTitle" class="drawer__title">—</div>
+      </div>
+      <div class="drawer__actions">
+        <button id="drawerPrimaryAction" class="btn btn--primary" type="button">Register</button>
+        <button id="drawerSecondaryAction" class="btn btn--ghost" type="button">Save</button>
       </div>
     </div>
 
-    <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
+    <div class="drawer__body">
+      <div class="drawer__main">
+        <div id="drawerBadges" class="badge-row"></div>
 
-    <!-- Details Drawer -->
-    <div id="drawerOverlay" class="overlay is-hidden" aria-hidden="true"></div>
-    <aside id="detailsDrawer" class="drawer is-hidden" aria-label="Details" aria-hidden="true">
-      <div class="drawer__header">
-        <button id="closeDrawer" class="icon-btn" type="button" aria-label="Close details">✕</button>
-        <div class="drawer__headings">
-          <div id="drawerKicker" class="drawer__kicker">—</div>
-          <div id="drawerTitle" class="drawer__title">—</div>
+        <div class="detail-grid">
+          <div class="detail-card" id="detailSummary"></div>
+          <div class="detail-card" id="detailPolicy"></div>
         </div>
-        <div class="drawer__actions">
-          <button id="drawerPrimaryAction" class="btn btn--primary" type="button">Register</button>
-          <button id="drawerSecondaryAction" class="btn btn--ghost" type="button">Save</button>
+
+        <div class="detail-card">
+          <div class="detail-card__title">Feedback & Reviews</div>
+          <div id="detailReviews" class="reviews"></div>
         </div>
       </div>
 
-      <div class="drawer__body">
-        <div class="drawer__main">
-          <div id="drawerBadges" class="badge-row"></div>
+      <div class="drawer__side">
+        <div class="side-card" id="sideStatus"></div>
+        <div class="side-card" id="sideActionForm"></div>
+      </div>
+    </div>
+  </aside>
 
-          <div class="detail-grid">
-            <div class="detail-card" id="detailSummary"></div>
-            <div class="detail-card" id="detailPolicy"></div>
+  <!-- Payment Modal -->
+  <div id="payOverlay" class="overlay is-hidden" aria-hidden="true"></div>
+  <section id="payModal" class="modal is-hidden" role="dialog" aria-modal="true" aria-label="Payment">
+    <div class="modal__header">
+      <div>
+        <div class="modal__kicker">Secure checkout</div>
+        <div class="modal__title">Hirex Pay</div>
+      </div>
+      <button id="closePay" class="icon-btn" type="button" aria-label="Close payment">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="pay">
+        <div class="pay__left">
+          <div class="pay__brand">
+            <div class="pay__logo" aria-hidden="true">⚡</div>
+            <div>
+              <div class="pay__merchant">Hirex</div>
+              <div class="pay__hint">Razorpay-style demo (UI only)</div>
+            </div>
           </div>
 
-          <div class="detail-card">
-            <div class="detail-card__title">Feedback & Reviews</div>
-            <div id="detailReviews" class="reviews"></div>
+          <div class="pay__line">
+            <div class="pay__label">Item</div>
+            <div class="pay__value" id="payItem">—</div>
+          </div>
+          <div class="pay__line">
+            <div class="pay__label">Amount</div>
+            <div class="pay__value" id="payAmount">—</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+            <label for="payEmail">Email</label>
+            <input id="payEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="payName">Name</label>
+            <input id="payName" type="text" placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="payMethod">Payment method</label>
+            <select id="payMethod">
+              <option value="upi">UPI</option>
+              <option value="card">Card</option>
+              <option value="netbanking">Netbanking</option>
+            </select>
           </div>
         </div>
 
-        <div class="drawer__side">
-          <div class="side-card" id="sideStatus"></div>
-          <div class="side-card" id="sideActionForm"></div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Payment Modal -->
-    <div id="payOverlay" class="overlay is-hidden" aria-hidden="true"></div>
-    <section id="payModal" class="modal is-hidden" role="dialog" aria-modal="true" aria-label="Payment">
-      <div class="modal__header">
-        <div>
-          <div class="modal__kicker">Secure checkout</div>
-          <div class="modal__title">Hirex Pay</div>
-        </div>
-        <button id="closePay" class="icon-btn" type="button" aria-label="Close payment">✕</button>
-      </div>
-      <div class="modal__body">
-        <div class="pay">
-          <div class="pay__left">
-            <div class="pay__brand">
-              <div class="pay__logo" aria-hidden="true">⚡</div>
-              <div>
-                <div class="pay__merchant">Hirex</div>
-                <div class="pay__hint">Razorpay-style demo (UI only)</div>
+        <div class="pay__right">
+          <div class="stepper">
+            <div class="step is-active" data-step="1">
+              <div class="step__dot" aria-hidden="true"></div>
+              <div class="step__text">
+                <div class="step__title">Checkout</div>
+                <div class="step__hint">Review and pay</div>
               </div>
             </div>
-
-            <div class="pay__line">
-              <div class="pay__label">Item</div>
-              <div class="pay__value" id="payItem">—</div>
-            </div>
-            <div class="pay__line">
-              <div class="pay__label">Amount</div>
-              <div class="pay__value" id="payAmount">—</div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="field">
-              <label for="payEmail">Email</label>
-              <input id="payEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="payName">Name</label>
-              <input id="payName" type="text" placeholder="Your name" autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="payMethod">Payment method</label>
-              <select id="payMethod">
-                <option value="upi">UPI</option>
-                <option value="card">Card</option>
-                <option value="netbanking">Netbanking</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="pay__right">
-            <div class="stepper">
-              <div class="step is-active" data-step="1">
-                <div class="step__dot" aria-hidden="true"></div>
-                <div class="step__text">
-                  <div class="step__title">Checkout</div>
-                  <div class="step__hint">Review and pay</div>
-                </div>
-              </div>
-              <div class="step" data-step="2">
-                <div class="step__dot" aria-hidden="true"></div>
-                <div class="step__text">
-                  <div class="step__title">Processing</div>
-                  <div class="step__hint">Verifying payment</div>
-                </div>
-              </div>
-              <div class="step" data-step="3">
-                <div class="step__dot" aria-hidden="true"></div>
-                <div class="step__text">
-                  <div class="step__title">Success</div>
-                  <div class="step__hint">Receipt and confirmation</div>
-                </div>
+            <div class="step" data-step="2">
+              <div class="step__dot" aria-hidden="true"></div>
+              <div class="step__text">
+                <div class="step__title">Processing</div>
+                <div class="step__hint">Verifying payment</div>
               </div>
             </div>
-
-            <div id="payScreen" class="pay-screen"></div>
-            <div class="modal__footer">
-              <button id="payBack" class="btn btn--ghost" type="button">Back</button>
-              <button id="payCta" class="btn btn--primary" type="button">Pay now</button>
+            <div class="step" data-step="3">
+              <div class="step__dot" aria-hidden="true"></div>
+              <div class="step__text">
+                <div class="step__title">Success</div>
+                <div class="step__hint">Receipt and confirmation</div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Policies Modal -->
-    <div id="helpOverlay" class="overlay is-hidden" aria-hidden="true"></div>
-    <section id="helpModal" class="modal is-hidden" role="dialog" aria-modal="true" aria-label="Policies">
-      <div class="modal__header">
-        <div>
-          <div class="modal__kicker">Platform policies</div>
-          <div class="modal__title">Payments, refunds & cancellation</div>
-        </div>
-        <button id="closeHelp" class="icon-btn" type="button" aria-label="Close policies">✕</button>
-      </div>
-      <div class="modal__body">
-        <div class="policy">
-          <div class="policy__section">
-            <div class="policy__title">Payment flow (applies everywhere)</div>
-            <ul class="list">
-              <li>Paid listings show <b>Proceed to Payment</b>.</li>
-              <li>Checkout is simulated (UI only).</li>
-              <li>After success you’ll see: <b>Payment Successful</b>, <b>Registration Confirmed</b>, and receipt message.</li>
-            </ul>
-          </div>
-
-          <div class="policy__section">
-            <div class="policy__title">Refund policy</div>
-            <ul class="list">
-              <li>Refund allowed <b>only until the event starts</b>.</li>
-              <li>After the event starts → <b>no refund possible</b>.</li>
-              <li>If organizer cancels → <b>full refund issued</b> automatically.</li>
-            </ul>
-          </div>
-
-          <div class="policy__section">
-            <div class="policy__title">Cancellation terms</div>
-            <ul class="list">
-              <li>You can cancel registration before event start.</li>
-              <li>Organizer cancellations trigger automatic refunds.</li>
-              <li>Cancellation status is clearly displayed in your registration state.</li>
-            </ul>
+          <div id="payScreen" class="pay-screen"></div>
+          <div class="modal__footer">
+            <button id="payBack" class="btn btn--ghost" type="button">Back</button>
+            <button id="payCta" class="btn btn--primary" type="button">Pay now</button>
           </div>
         </div>
       </div>
-      <div class="modal__footer">
-        <button id="closeHelp2" class="btn btn--primary" type="button">Got it</button>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__left">
-          <div class="footer__brand">Hirex</div>
-          <div class="footer__note">UI-only prototype • dummy data • no backend</div>
+  <!-- Policies Modal -->
+  <div id="helpOverlay" class="overlay is-hidden" aria-hidden="true"></div>
+  <section id="helpModal" class="modal is-hidden" role="dialog" aria-modal="true" aria-label="Policies">
+    <div class="modal__header">
+      <div>
+        <div class="modal__kicker">Platform policies</div>
+        <div class="modal__title">Payments, refunds & cancellation</div>
+      </div>
+      <button id="closeHelp" class="icon-btn" type="button" aria-label="Close policies">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="policy">
+        <div class="policy__section">
+          <div class="policy__title">Payment flow (applies everywhere)</div>
+          <ul class="list">
+            <li>Paid listings show <b>Proceed to Payment</b>.</li>
+            <li>Checkout is simulated (UI only).</li>
+            <li>After success you’ll see: <b>Payment Successful</b>, <b>Registration Confirmed</b>, and receipt message.
+            </li>
+          </ul>
         </div>
-        <div class="footer__right">
-          <button id="wipeLocal" class="btn btn--ghost" type="button">Reset demo data</button>
+
+        <div class="policy__section">
+          <div class="policy__title">Refund policy</div>
+          <ul class="list">
+            <li>Refund allowed <b>only until the event starts</b>.</li>
+            <li>After the event starts → <b>no refund possible</b>.</li>
+            <li>If organizer cancels → <b>full refund issued</b> automatically.</li>
+          </ul>
+        </div>
+
+        <div class="policy__section">
+          <div class="policy__title">Cancellation terms</div>
+          <ul class="list">
+            <li>You can cancel registration before event start.</li>
+            <li>Organizer cancellations trigger automatic refunds.</li>
+            <li>Cancellation status is clearly displayed in your registration state.</li>
+          </ul>
         </div>
       </div>
-    </footer>
+    </div>
+    <div class="modal__footer">
+      <button id="closeHelp2" class="btn btn--primary" type="button">Got it</button>
+    </div>
+  </section>
 
-    <script src="./app.js" defer></script>
-  </body>
+  <script src="./app.js" defer></script>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <div class="footer__brand">Hirex</div>
+        <div class="footer__note">UI-only prototype • dummy data • no backend</div>
+      </div>
+      <div class="footer__right">
+        <button id="wipeLocal" class="btn btn--ghost" type="button">Reset demo data</button>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
 </html>

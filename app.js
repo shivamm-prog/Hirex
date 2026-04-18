@@ -738,7 +738,7 @@ function renderChips() {
 
 function setRoute(route) {
   UI.route = route;
-  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
+  document.querySelectorAll(".navlink").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
   el("sectionHome").classList.toggle("is-hidden", route !== "home");
   el("sectionList").classList.toggle("is-hidden", route === "home");
   const [t, s] = listTitleForRoute(route);
@@ -1371,8 +1371,8 @@ function renderPayScreen(item, payload) {
 function init() {
   render();
 
-  // Tabs
-  document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => setRoute(b.dataset.route)));
+  // Top navigation links
+  document.querySelectorAll(".navlink").forEach((b) => b.addEventListener("click", () => setRoute(b.dataset.route)));
   document.querySelectorAll(".pill").forEach((b) => b.addEventListener("click", () => setScope(b.dataset.filterScope)));
 
   el("globalSearch").addEventListener("input", (e) => {
@@ -1445,13 +1445,20 @@ function init() {
 
   // Hero shortcuts
   el("goUpcoming").addEventListener("click", () => setRoute("hackathons"));
-  el("goRegistered").addEventListener("click", () => {
-    setRoute("home");
-    toast("Tip", "Scroll to “Registered / applied” to see your saved state.", "warn");
-    setTimeout(() => {
-      document.querySelectorAll(".section")[1]?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-  });
+  el("goOpportunities").addEventListener("click", () => setRoute("opportunities"));
+
+  // Navbar polish: subtle shadow on scroll
+  const topbar = el("topbar");
+  const onScroll = () => {
+    const scrolled = window.scrollY > 6;
+    topbar?.classList.toggle("is-scrolled", scrolled);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Icon actions (demo)
+  el("openNotifications")?.addEventListener("click", () => toast("Notifications", "No new notifications (demo).", "warn"));
+  el("openProfile")?.addEventListener("click", () => toast("Profile", "Profile actions are UI-only in this prototype.", "warn"));
 
   // Payment modal
   el("closePay").addEventListener("click", closePayment);

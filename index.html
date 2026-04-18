@@ -19,7 +19,7 @@
   <body>
     <a class="skip-link" href="#app">Skip to content</a>
 
-    <header class="topbar">
+    <header class="topbar" id="topbar">
       <div class="container topbar__inner">
         <div class="brand" role="banner" aria-label="Hirex">
           <div class="brand__mark" aria-hidden="true">H</div>
@@ -29,58 +29,63 @@
           </div>
         </div>
 
-        <div class="topbar__actions">
-          <div class="search">
-            <span class="search__icon" aria-hidden="true">⌕</span>
-            <input
-              id="globalSearch"
-              class="search__input"
-              type="search"
-              placeholder="Search hackathons, jobs, workshops…"
-              autocomplete="off"
-            />
-          </div>
-          <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
+        <nav class="topnav" aria-label="Primary navigation">
+          <button class="navlink is-active" data-route="home" type="button">Home</button>
+          <button class="navlink" data-route="hackathons" type="button">Hackathons</button>
+          <button class="navlink" data-route="workshops" type="button">Workshops</button>
+          <button class="navlink" data-route="seminars" type="button">Seminars</button>
+          <button class="navlink" data-route="opportunities" type="button">Opportunities</button>
+        </nav>
+
+        <div class="topbar__actions" aria-label="User actions">
+          <button id="openNotifications" class="icon-btn" type="button" aria-label="Notifications">
+            <span aria-hidden="true">🔔</span>
+          </button>
+          <button id="openProfile" class="icon-btn" type="button" aria-label="Profile">
+            <span aria-hidden="true">👤</span>
+          </button>
         </div>
       </div>
     </header>
 
-    <div class="subbar">
-      <div class="container subbar__inner">
-        <nav class="tabs" aria-label="Primary navigation">
-          <button class="tab is-active" data-route="home" type="button">Home</button>
-          <button class="tab" data-route="hackathons" type="button">Hackathons</button>
-          <button class="tab" data-route="workshops" type="button">Workshops</button>
-          <button class="tab" data-route="seminars" type="button">Seminars</button>
-          <button class="tab" data-route="opportunities" type="button">Opportunities</button>
-        </nav>
-
+    <div class="pillstrip">
+      <div class="container pillstrip__inner">
         <div class="pillbar" role="group" aria-label="Filter type">
           <button class="pill is-active" data-filter-scope="all" type="button">All</button>
           <button class="pill" data-filter-scope="events" type="button">Events</button>
           <button class="pill" data-filter-scope="opps" type="button">Opportunities</button>
         </div>
+
+        <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
       </div>
     </div>
 
     <main id="app" class="app" tabindex="-1">
       <div class="container">
-        <section class="hero" aria-label="Dashboard overview">
-          <div class="hero__left">
-            <div class="hero__kicker">Welcome back</div>
-            <h1 class="hero__title">Explore, register, apply — all in one place.</h1>
-            <p class="hero__subtitle">
-              A clean, production-like demo with simulated registrations, Razorpay-style payments, receipts, cancellations,
-              refunds, and real-looking reviews.
-            </p>
-            <div class="hero__cta">
-              <button id="goUpcoming" class="btn btn--primary" type="button">View upcoming hackathons</button>
-              <button id="goRegistered" class="btn btn--secondary" type="button">My registrations</button>
-            </div>
-          </div>
+        <section class="hero hero--home" aria-label="Hirex homepage hero">
+          <div class="hero__inner">
+            <h1 class="hero__title">Discover Events & Opportunities That Shape Your Career</h1>
+            <p class="hero__subtitle">Hackathons, Jobs, Internships, Workshops & more in one platform</p>
 
-          <div class="hero__right">
-            <div class="stats">
+            <div class="hero__search">
+              <div class="search search--hero">
+                <span class="search__icon" aria-hidden="true">⌕</span>
+                <input
+                  id="globalSearch"
+                  class="search__input"
+                  type="search"
+                  placeholder="Search events and opportunities…"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="hero__cta hero__cta--center">
+              <button id="goUpcoming" class="btn btn--primary" type="button">Explore Events</button>
+              <button id="goOpportunities" class="btn btn--secondary" type="button">Browse Opportunities</button>
+            </div>
+
+            <div class="hero__stats">
               <div class="stat">
                 <div class="stat__label">This week</div>
                 <div class="stat__value" id="statWeek">—</div>
@@ -95,14 +100,6 @@
                 <div class="stat__label">Trust</div>
                 <div class="stat__value" id="statTrust">—</div>
                 <div class="stat__hint">avg. score</div>
-              </div>
-            </div>
-
-            <div class="callout">
-              <div class="callout__title">Tip</div>
-              <div class="callout__body">
-                Paid listings follow a consistent flow: <b>Proceed to Payment</b> → checkout → <b>Payment Successful</b>
-                → receipt confirmation.
               </div>
             </div>
           </div>

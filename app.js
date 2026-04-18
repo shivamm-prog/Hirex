@@ -17,6 +17,22 @@ const daysFromNow = (d) => {
   t.setHours(10, 0, 0, 0);
   return t.toISOString();
 };
+const minutesAgo = (m) => {
+  const t = new Date();
+  t.setMinutes(t.getMinutes() - m);
+  return t.toISOString();
+};
+function relTime(iso) {
+  const t = new Date(iso).getTime();
+  if (!Number.isFinite(t)) return "—";
+  const diffSec = Math.max(0, (now().getTime() - t) / 1000);
+  if (diffSec < 90) return "Just now";
+  const diffMin = diffSec / 60;
+  if (diffMin < 60) return `${Math.floor(diffMin)}m ago`;
+  const diffHr = diffMin / 60;
+  if (diffHr < 48) return `${Math.floor(diffHr)}h ago`;
+  return fmtDate(iso);
+}
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 const uid = () => Math.random().toString(16).slice(2) + Date.now().toString(16);
 
@@ -90,9 +106,98 @@ const NETWORK = {
     { id: "usr-6", name: "Harsh Verma", role: "Cybersecurity Engineer", skills: ["Security", "SOC", "Cloud"], mutual: 4, status: "connected" },
   ],
   feed: [
-    { id: "post-1", title: "AI Hiring Trends Q2", category: "Tech", body: "Companies are prioritizing practical ML deployment and prompt engineering skills in fresher roles.", by: "Hirex Insights", at: daysFromNow(-1), likes: 42, comments: 8, shares: 4 },
-    { id: "post-2", title: "Startup Funding Pulse", category: "Finance", body: "Early-stage SaaS and AI-enabled operations tools continue to attract strong investor interest this quarter.", by: "FinSight News", at: daysFromNow(-2), likes: 35, comments: 11, shares: 7 },
-    { id: "post-3", title: "Performance Marketing Shift", category: "Marketing", body: "Teams are reallocating spend from broad ads to creator-led campaigns and community growth channels.", by: "Growth Weekly", at: daysFromNow(-3), likes: 28, comments: 6, shares: 5 },
+    {
+      id: "n1",
+      category: "markets",
+      breaking: true,
+      ticker: "NIFTY 50",
+      move: "+0.58%",
+      moveDir: "up",
+      title: "Nifty reclaims 24,200 as IT majors lift benchmarks",
+      deck: "Buying returned across large-caps after a steady start to the session, with breadth improving through the afternoon.",
+      body: "Traders pointed to fresh allocations in software services and selective PSU banks as sentiment steadied. Volatility cooled slightly versus last week, though global cues remain the swing factor for near-term direction.",
+      source: "MarketWire Live",
+      at: minutesAgo(5),
+    },
+    {
+      id: "n2",
+      category: "markets",
+      breaking: false,
+      ticker: "SENSEX",
+      move: "+0.41%",
+      moveDir: "up",
+      title: "Sensex extends gains; investors watch currency and crude",
+      deck: "The rupee and Brent moves are in focus ahead of overseas inflation prints.",
+      body: "Desk commentary highlights a preference for quality balance sheets and exporters hedging FX exposure. Mid-caps lagged briefly but participation ticked higher in the final hour.",
+      source: "CapitalDesk",
+      at: minutesAgo(18),
+    },
+    {
+      id: "n3",
+      category: "markets",
+      breaking: false,
+      ticker: "BANK NIFTY",
+      move: "-0.22%",
+      moveDir: "down",
+      title: "Bank Nifty slips as traders book profits after a strong run",
+      deck: "Private lenders saw two-way action while PSU names held relatively firm.",
+      body: "Analysts note that credit growth narratives remain intact, but short-term positioning is lighter ahead of scheduled macro data. Flows from domestic institutions stayed net supportive on dips.",
+      source: "TradeStream",
+      at: minutesAgo(42),
+    },
+    {
+      id: "n4",
+      category: "markets",
+      breaking: true,
+      ticker: "USD/INR",
+      move: "-0.05%",
+      moveDir: "flat",
+      title: "Rupee steady as RBI watchers flag balanced liquidity stance",
+      deck: "FX desks report range-bound trading with importers and exporters offsetting each other.",
+      body: "Policy expectations are priced for continuity, with emphasis on anchoring inflation expectations. Offshore dollar moves overnight will set the tone for Monday’s opening.",
+      source: "FX Pulse India",
+      at: minutesAgo(63),
+    },
+    {
+      id: "n5",
+      category: "tech",
+      breaking: true,
+      title: "Chip majors signal sustained AI accelerator demand through 2026",
+      deck: "Cloud hyperscalers are still expanding GPU clusters for training and inference workloads.",
+      body: "Supply chains for advanced packaging remain tight, pushing lead times for high-end accelerators. Enterprise buyers are shifting budgets toward retrieval-augmented stacks and smaller fine-tuned models to control cost per token.",
+      source: "Silicon Brief",
+      at: minutesAgo(7),
+    },
+    {
+      id: "n6",
+      category: "tech",
+      breaking: false,
+      title: "Major cloud providers post resilient enterprise spend on data and AI services",
+      deck: "Consumption-based revenue grew even as customers optimize legacy footprints.",
+      body: "CFO commentary emphasized multi-year commitments on analytics and security SKUs. Partners report stronger pipeline for migration plus modernization bundles rather than lift-and-shift alone.",
+      source: "Cloud Ledger",
+      at: minutesAgo(26),
+    },
+    {
+      id: "n7",
+      category: "tech",
+      breaking: false,
+      title: "EU AI Act implementation spurs tooling rush for compliance and documentation",
+      deck: "Vendors are bundling risk registers, eval harnesses, and audit trails for model releases.",
+      body: "Legal and engineering teams are collaborating earlier in the SDLC. Mid-size SaaS firms are prioritizing EU deployments with transparent logging to avoid rework when rules tighten further.",
+      source: "Policy & Code",
+      at: minutesAgo(55),
+    },
+    {
+      id: "n8",
+      category: "tech",
+      breaking: false,
+      title: "Indian SaaS and devtools startups raise follow-on rounds on strong NRR",
+      deck: "Investors cite durable expansion revenue and India-first GTM before global scale.",
+      body: "Founders highlighted tighter CAC payback and community-led adoption on campuses as differentiators. Secondary interest is rising for employee liquidity in later-stage names.",
+      source: "Startup Circuit",
+      at: minutesAgo(120),
+    },
   ],
   companyPosts: [
     { id: "req-1", title: "Hiring: Junior Frontend Engineer", company: "BluePeak Labs", domain: "Web", location: "Remote", kind: "Job", description: "Need strong React fundamentals, API integration, and component-driven development." },
@@ -573,16 +678,50 @@ function connectionCardHtml(person) {
   `;
 }
 
-function feedCardHtml(post) {
+function liveNewsTickerSeg(posts) {
+  return posts
+    .map(
+      (p) =>
+        `<span class="net-live-ticker__item net-live-ticker__item--${p.category === "markets" ? "markets" : "tech"}"><span class="net-live-ticker__tag">${escapeHtml(
+          p.category === "markets" ? "MKTS" : "TECH",
+        )}</span><span class="net-live-ticker__text">${escapeHtml(p.title)}</span></span>`,
+    )
+    .join("");
+}
+
+function feedCardHtml(post, index = 0) {
+  const cat = post.category === "markets" ? "markets" : "tech";
+  const delay = Math.min(index * 0.08, 0.85);
+  const breaking = post.breaking ? `<span class="net-news-card__flag" aria-label="Breaking">Breaking</span>` : "";
+  const moveBlock =
+    post.move && post.ticker
+      ? `<span class="net-news-card__ticker-pill net-news-card__ticker-pill--${post.moveDir || "up"}"><span class="net-news-card__sym">${escapeHtml(
+          post.ticker,
+        )}</span><span class="net-news-card__mv">${escapeHtml(post.move)}</span></span>`
+      : post.move
+        ? `<span class="net-news-card__ticker-pill net-news-card__ticker-pill--${post.moveDir || "up"}"><span class="net-news-card__mv">${escapeHtml(post.move)}</span></span>`
+        : "";
+  const catLabel = cat === "markets" ? "Markets" : "Tech";
   return `
-    <article class="net-feed-card">
-      <div class="net-feed-card__title">${escapeHtml(post.title)}</div>
-      <div class="badge-row" style="margin-top:8px">${badge(post.category, "online")} ${badge(post.by, "verified")} ${badge(fmtDate(post.at), "trust")}</div>
-      <div class="net-feed-card__body">${escapeHtml(post.body)}</div>
-      <div class="net-feed-card__actions">
-        <button class="btn btn--ghost" type="button">Like (${post.likes})</button>
-        <button class="btn btn--ghost" type="button">Comment (${post.comments})</button>
-        <button class="btn btn--ghost" type="button">Share (${post.shares})</button>
+    <article class="net-news-card net-news-card--${cat}" style="--enter-delay:${delay}s">
+      <div class="net-news-card__shine" aria-hidden="true"></div>
+      <div class="net-news-card__top">
+        <div class="net-news-card__meta">
+          ${breaking}
+          <span class="net-news-card__pill">${escapeHtml(catLabel)}</span>
+          <span class="net-news-card__time"><span class="net-news-card__time-dot" aria-hidden="true"></span>${escapeHtml(relTime(post.at))}</span>
+        </div>
+        ${moveBlock}
+      </div>
+      <h3 class="net-news-card__headline">${escapeHtml(post.title)}</h3>
+      <p class="net-news-card__deck">${escapeHtml(post.deck)}</p>
+      <p class="net-news-card__body">${escapeHtml(post.body)}</p>
+      <div class="net-news-card__foot">
+        <span class="net-news-card__source">${escapeHtml(post.source)}</span>
+        <div class="net-news-card__actions">
+          <button class="btn btn--ghost net-news-card__btn" type="button" data-news-action="save">Save</button>
+          <button class="btn btn--ghost net-news-card__btn" type="button" data-news-action="share">Share</button>
+        </div>
       </div>
     </article>
   `;
@@ -624,9 +763,43 @@ function renderNetworking() {
         <div class="net-people-grid">${suggested.map(connectionCardHtml).join("") || `<div class="muted">No profiles match this search.</div>`}</div>
       </div>
     </div>
-    <div class="section">
-      <div class="section__head"><div><div class="section__title">Community Feed</div><div class="section__sub">Industry updates, business trends, and professional discussions.</div></div></div>
-      <div class="section__body"><div class="net-feed">${NETWORK.feed.map(feedCardHtml).join("")}</div></div>
+    <div class="section section--live-news">
+      <div class="section__head">
+        <div>
+          <div class="section__title">Community Feed</div>
+          <div class="section__sub">Live-style wire for markets and tech — curated headlines with a broadcast feel (demo).</div>
+        </div>
+        <div class="net-live-feed__head-aside" aria-hidden="true">
+          <span class="net-live-feed__wow">Wow</span>
+        </div>
+      </div>
+      <div class="section__body net-live-feed">
+        <div class="net-live-feed__mast">
+          <div class="net-live-feed__brand">
+            <span class="net-live-pulse" aria-hidden="true"><span class="net-live-pulse__ring"></span><span class="net-live-pulse__core"></span></span>
+            <div>
+              <div class="net-live-feed__label">
+                <span class="net-live-feed__live-text">LIVE</span>
+                <span class="net-live-feed__wire">WIRE</span>
+              </div>
+              <p class="net-live-feed__hint">Headlines refresh as you explore — ticker below mirrors the stream.</p>
+            </div>
+          </div>
+          <div class="net-live-feed__chips">
+            <span class="net-live-chip net-live-chip--markets">Nifty • Sensex • FX</span>
+            <span class="net-live-chip net-live-chip--tech">Chips • Cloud • Policy</span>
+          </div>
+        </div>
+        <div class="net-live-ticker" role="region" aria-label="Scrolling headlines">
+          <div class="net-live-ticker__viewport">
+            <div class="net-live-ticker__track">
+              <div class="net-live-ticker__seg">${liveNewsTickerSeg(NETWORK.feed)}</div>
+              <div class="net-live-ticker__seg" aria-hidden="true">${liveNewsTickerSeg(NETWORK.feed)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="net-live-stream">${NETWORK.feed.map((p, i) => feedCardHtml(p, i)).join("")}</div>
+      </div>
     </div>
     <div class="section">
       <div class="section__head"><div><div class="section__title">Company Requirements Board</div><div class="section__sub">Requirements posted by companies and opportunities for users.</div></div></div>
@@ -680,6 +853,13 @@ function renderNetworking() {
   wrap.querySelector("[data-edit-profile]")?.addEventListener("click", () => {
     toast("Profile editor", "Editable profile sections are simulated in this prototype.", "warn");
   });
+  wrap.querySelectorAll("[data-news-action]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const kind = b.getAttribute("data-news-action");
+      if (kind === "save") toast("Reading list", "Story saved (demo).", "ok");
+      else toast("Share", "Link copied to clipboard (demo).", "ok");
+    }),
+  );
 }
 
 function renderList() {

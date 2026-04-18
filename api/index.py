@@ -1,12 +1,16 @@
-import json
 import uuid
 from datetime import datetime, timedelta
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory, abort
 from flask_cors import CORS
 import os
+import threading
+import json
 
 app = Flask(__name__)
 CORS(app)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+STATE_FILE = os.path.join(BASE_DIR, "data", "state.json")
+STATE_LOCK = threading.Lock()
 
 def daysFromNow(d):
     dt = datetime.now() + timedelta(days=d)
@@ -343,12 +347,35 @@ def get_data():
       }
     }
 
-# Dummy in-memory DB for states
-# In a real app this would be tied to user sessions/IDs
-state_db = {
-    "registrations": {},
-    "saves": {}
-}
+def ensure_state_file():
+    os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+    if not os.path.exists(STATE_FILE):
+        with open(STATE_FILE, "w", encoding="utf-8") as f:
+            json.dump({"registrations": {}, "saves": {}}, f, ensure_ascii=False, indent=2)
+
+
+def load_state():
+    ensure_state_file()
+    with STATE_LOCK:
+        try:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return {
+                    "registrations": data.get("registrations", {}),
+                    "saves": data.get("saves", {}),
+                }
+        except Exception:
+            return {"registrations": {}, "saves": {}}
+
+
+def save_state(state):
+    ensure_state_file()
+    with STATE_LOCK:
+        with open(STATE_FILE, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+
+
+state_db = load_state()
 
 
 
@@ -356,18 +383,27 @@ state_db = {
 def get_all_data():
     return jsonify(get_data())
 
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok", "service": "hirex-api"})
+
 @app.route('/api/state', methods=['GET'])
 def get_user_state():
+    global state_db
+    state_db = load_state()
     return jsonify(state_db)
 
 @app.route('/api/reset', methods=['POST'])
 def reset_state():
+    global state_db
     state_db["registrations"] = {}
     state_db["saves"] = {}
+    save_state(state_db)
     return jsonify({"message": "State reset", "state": state_db})
 
 @app.route('/api/save', methods=['POST'])
 def toggle_save():
+    global state_db
     req = request.json
     item_id = req.get('itemId')
     is_saved = req.get('isSaved', False)
@@ -375,10 +411,12 @@ def toggle_save():
         state_db['saves'][item_id] = True
     else:
         state_db['saves'].pop(item_id, None)
+    save_state(state_db)
     return jsonify(state_db)
 
 @app.route('/api/register', methods=['POST'])
 def register_item():
+    global state_db
     req = request.json
     item = req.get('item')
     payload = req.get('payload')
@@ -402,11 +440,12 @@ def register_item():
         "cancellation": { "status": "active" },
         "form": payload
     }
-    
+    save_state(state_db)
     return jsonify(state_db)
 
 @app.route('/api/apply', methods=['POST'])
 def apply_item():
+    global state_db
     # Application is similar to free registration, but status="applied"
     req = request.json
     item = req.get('item')
@@ -422,11 +461,13 @@ def apply_item():
         "cancellation": { "status": "active" },
         "form": payload
     }
+    save_state(state_db)
     return jsonify(state_db)
 
 
 @app.route('/api/cancel', methods=['POST'])
 def cancel_registration():
+    global state_db
     req = request.json
     item = req.get('item')
     reason = req.get('reason', 'User cancelled')
@@ -470,7 +511,23 @@ def cancel_registration():
             reg['refund'] = {"status": "not_required", "amount": 0}
         
     state_db['registrations'][item['id']] = reg
+    save_state(state_db)
     return jsonify(state_db)
+
+
+@app.route("/", methods=["GET"])
+def serve_index():
+    return send_from_directory(BASE_DIR, "index.html")
+
+
+@app.route("/<path:path>", methods=["GET"])
+def serve_static(path):
+    if path.startswith("api/"):
+        abort(404)
+    file_path = os.path.join(BASE_DIR, path)
+    if not os.path.isfile(file_path):
+        return send_from_directory(BASE_DIR, "index.html")
+    return send_from_directory(BASE_DIR, path)
 
 
 if __name__ == '__main__':

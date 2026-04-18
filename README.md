@@ -1,33 +1,41 @@
-# Hirex — Events & Opportunities (UI Prototype)
+# Hirex — Events & Opportunities (Full frontend + backend)
 
-Modern, responsive, UI-only prototype for **Hirex** (events and opportunities platform).
+Modern, responsive Hirex web app with:
+- **Frontend**: `index.html`, `styles.css`, `app.js`
+- **Backend API**: `api/index.py` (Flask)
 
-## How to run
+The frontend is connected to the backend via `/api/*` endpoints for listing data, registration, apply, save, cancel, and reset.
 
-- Open `index.html` in your browser (double-click it).
+## Run locally (recommended)
 
-No backend, no build tools, and no installs are required.
+1. Open terminal in project root:
+   - `c:\SHIVAM\Event and opportunity posting`
+2. Install dependencies:
+   - `pip install -r requirements.txt`
+3. Start backend server:
+   - `python api/index.py`
+4. Open in browser:
+   - [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-## What’s included
+## Backend endpoints
 
-- **Tabs**: Home, Hackathons, Workshops, Seminars, Opportunities  
-- **Card-based listings**: rounded corners, soft shadows, hover effects, responsive grid
-- **Details drawer** for every listing with:
-  - **Register / Apply** flow (dummy forms)
-  - **Paid flow** (consistent everywhere payments exist):
-    - “Proceed to Payment”
-    - Razorpay-style checkout (UI only)
-    - After success: **Payment Successful**, **Registration Confirmed**, and
-      “**A payment receipt has been sent to your registered email address**”
-  - **Refund + cancellation terms**:
-    - Refund allowed only until event start
-    - After event starts → no refund
-    - Organizer cancellations → full refund (simulated)
-    - Cancellation status is clearly displayed
-  - **Feedback & Reviews** section (scrollable cards)
+- `GET /api/health` → health check
+- `GET /api/data` → listings data
+- `GET /api/state` → current app state
+- `POST /api/save` → save/unsave listing
+- `POST /api/register` → register for events (paid/free simulation)
+- `POST /api/apply` → apply to opportunities
+- `POST /api/cancel` → cancel registration (user/organizer flow)
+- `POST /api/reset` → reset saved state/registrations
 
-## Notes
+## Persistence
 
-- All data is dummy and stored locally in your browser via `localStorage`.
-- Use **“Reset demo data”** in the footer to clear registrations/applies/saves.
+- App state is now persisted in:
+  - `data/state.json`
+- This means registrations/saves survive server restarts.
+
+## Deployment
+
+- `vercel.json` rewrites `/api/*` to `api/index.py` for serverless deployment.
+- Static frontend files are served from the project root.
 

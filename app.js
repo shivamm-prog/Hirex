@@ -40,6 +40,8 @@ const UI = {
   route: "home",
   scope: "all",
   q: "",
+  networkSearch: "",
+  requirementTab: "company",
   filters: {
     mode: "any",
     price: "any",
@@ -61,6 +63,46 @@ const UI = {
 
 const el = (id) => document.getElementById(id);
 let state = { registrations: {}, saves: {} };
+
+const NETWORK = {
+  me: {
+    id: "usr-me",
+    name: "Shivam Gupta",
+    headline: "Full Stack Developer | Community Builder",
+    about:
+      "Building practical products, mentoring students, and helping teams ship polished user experiences with measurable impact.",
+    photo: "SG",
+    skills: ["React", "Python", "Flask", "UI/UX", "SQL"],
+    experience: [
+      { role: "Frontend Developer", company: "BluePeak Labs", period: "2024 - Present" },
+      { role: "Community Lead", company: "DevCircle", period: "2022 - 2024" },
+    ],
+    education: "B.Tech Computer Science • 2025",
+    projects: ["Hirex Platform", "Campus Mentor Hub"],
+    contact: "shivam@example.com",
+  },
+  people: [
+    { id: "usr-1", name: "Aditi Sharma", role: "Product Manager", skills: ["Product", "Growth", "Analytics"], mutual: 14, status: "none" },
+    { id: "usr-2", name: "Kunal Mehta", role: "Software Engineer", skills: ["Backend", "API", "Python"], mutual: 9, status: "connected" },
+    { id: "usr-3", name: "Riya Singh", role: "Data Analyst", skills: ["SQL", "Power BI", "Finance"], mutual: 5, status: "incoming" },
+    { id: "usr-4", name: "Dev Patel", role: "UI/UX Designer", skills: ["Figma", "Design Systems", "Research"], mutual: 11, status: "none" },
+    { id: "usr-5", name: "Meera Nair", role: "Marketing Specialist", skills: ["Marketing", "Content", "Brand"], mutual: 6, status: "none" },
+    { id: "usr-6", name: "Harsh Verma", role: "Cybersecurity Engineer", skills: ["Security", "SOC", "Cloud"], mutual: 4, status: "connected" },
+  ],
+  feed: [
+    { id: "post-1", title: "AI Hiring Trends Q2", category: "Tech", body: "Companies are prioritizing practical ML deployment and prompt engineering skills in fresher roles.", by: "Hirex Insights", at: daysFromNow(-1), likes: 42, comments: 8, shares: 4 },
+    { id: "post-2", title: "Startup Funding Pulse", category: "Finance", body: "Early-stage SaaS and AI-enabled operations tools continue to attract strong investor interest this quarter.", by: "FinSight News", at: daysFromNow(-2), likes: 35, comments: 11, shares: 7 },
+    { id: "post-3", title: "Performance Marketing Shift", category: "Marketing", body: "Teams are reallocating spend from broad ads to creator-led campaigns and community growth channels.", by: "Growth Weekly", at: daysFromNow(-3), likes: 28, comments: 6, shares: 5 },
+  ],
+  companyPosts: [
+    { id: "req-1", title: "Hiring: Junior Frontend Engineer", company: "BluePeak Labs", domain: "Web", location: "Remote", kind: "Job", description: "Need strong React fundamentals, API integration, and component-driven development." },
+    { id: "req-2", title: "Need UI Audit Consultant", company: "NovaMart", domain: "UI/UX", location: "Mumbai", kind: "Service", description: "Looking for UI experts to audit onboarding and checkout journeys." },
+  ],
+  opportunityPosts: [
+    { id: "op-1", title: "Hiring Need: Data Intern", company: "FinSight", domain: "Data", location: "Pune", kind: "Hiring need", description: "Internship role for dashboarding, reporting, and SQL-based analysis." },
+    { id: "op-2", title: "Open Requirement: Security Analyst", company: "SecureOps Guild", domain: "Security", location: "Delhi", kind: "Job", description: "Entry role for threat detection, incident triage, and reporting workflows." },
+  ],
+};
 
 const chipConfig = [
   { id: "recommended", label: "Recommended" },
@@ -232,10 +274,9 @@ function itemKicker(item) {
 }
 
 function listTitleForRoute(route) {
-  if (route === "hackathons") return ["Hackathons", "Team-based registrations with trust scores and reviews."];
-  if (route === "workshops") return ["Workshops", "Domain-based sessions with online/offline and pricing badges."];
-  if (route === "seminars") return ["Seminars", "Hosts, organizers, time/date, and consistent payment flow."];
+  if (route === "events") return ["Events", "Hackathons, workshops, and seminars with one structured flow."];
   if (route === "opportunities") return ["Opportunities", "Jobs, internships, and freelance projects with apply flows."];
+  if (route === "networking") return ["Networking", "Professional profiles, connections, community feed, and requirement board."];
   return ["Home", "Upcoming items, your registrations, and smart suggestions."];
 }
 
@@ -473,6 +514,174 @@ function renderHome() {
   }
 }
 
+function profileCardHtml() {
+  const p = NETWORK.me;
+  return `
+    <div class="section">
+      <div class="section__head">
+        <div>
+          <div class="section__title">Professional Profile</div>
+          <div class="section__sub">LinkedIn-style profile with editable cards</div>
+        </div>
+      </div>
+      <div class="section__body">
+        <div class="net-profile">
+          <div class="net-profile__top">
+            <div class="net-avatar">${escapeHtml(p.photo)}</div>
+            <div>
+              <div class="net-name">${escapeHtml(p.name)}</div>
+              <div class="net-headline">${escapeHtml(p.headline)}</div>
+              <div class="badge-row" style="margin-top:8px">${badge("Connections", "verified")} ${badge(String(NETWORK.people.filter((x) => x.status === "connected").length), "trust")}</div>
+            </div>
+            <button class="btn btn--ghost" data-edit-profile type="button">Edit Profile</button>
+          </div>
+          <div class="net-grid">
+            <div class="net-box"><div class="net-box__title">About</div><div class="net-box__text">${escapeHtml(p.about)}</div></div>
+            <div class="net-box"><div class="net-box__title">Skills</div><div class="badge-row">${p.skills.map((s) => badge(s)).join("")}</div></div>
+            <div class="net-box"><div class="net-box__title">Experience</div>${p.experience.map((e) => `<div class="net-line"><b>${escapeHtml(e.role)}</b> • ${escapeHtml(e.company)} <span>${escapeHtml(e.period)}</span></div>`).join("")}</div>
+            <div class="net-box"><div class="net-box__title">Education & Projects</div><div class="net-line">${escapeHtml(p.education)}</div><div class="net-line">${escapeHtml(p.projects.join(" • "))}</div><div class="net-line">${escapeHtml(p.contact)}</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function connectionCardHtml(person) {
+  const action =
+    person.status === "connected"
+      ? `<button class="btn btn--secondary" disabled type="button">Connected</button><button class="btn btn--ghost" type="button">Message</button>`
+      : person.status === "requested"
+        ? `<button class="btn btn--ghost" disabled type="button">Requested</button>`
+        : person.status === "incoming"
+          ? `<button class="btn btn--primary" data-accept="${person.id}" type="button">Accept</button><button class="btn btn--ghost" data-reject="${person.id}" type="button">Reject</button>`
+          : `<button class="btn btn--primary" data-connect="${person.id}" type="button">Connect</button><button class="btn btn--ghost" type="button">Message</button>`;
+
+  return `
+    <article class="net-person">
+      <div class="net-person__top">
+        <div class="net-avatar net-avatar--sm">${escapeHtml(person.name.split(" ").map((x) => x[0]).join("").slice(0, 2))}</div>
+        <div>
+          <div class="net-person__name">${escapeHtml(person.name)}</div>
+          <div class="net-person__role">${escapeHtml(person.role)}</div>
+          <div class="net-person__mutual">${person.mutual} mutual connections</div>
+        </div>
+      </div>
+      <div class="badge-row" style="margin-top:8px">${person.skills.slice(0, 3).map((s) => badge(s)).join("")}</div>
+      <div class="net-person__actions">${action}</div>
+    </article>
+  `;
+}
+
+function feedCardHtml(post) {
+  return `
+    <article class="net-feed-card">
+      <div class="net-feed-card__title">${escapeHtml(post.title)}</div>
+      <div class="badge-row" style="margin-top:8px">${badge(post.category, "online")} ${badge(post.by, "verified")} ${badge(fmtDate(post.at), "trust")}</div>
+      <div class="net-feed-card__body">${escapeHtml(post.body)}</div>
+      <div class="net-feed-card__actions">
+        <button class="btn btn--ghost" type="button">Like (${post.likes})</button>
+        <button class="btn btn--ghost" type="button">Comment (${post.comments})</button>
+        <button class="btn btn--ghost" type="button">Share (${post.shares})</button>
+      </div>
+    </article>
+  `;
+}
+
+function requirementCardHtml(item) {
+  return `
+    <article class="net-req-card">
+      <div class="net-req-card__title">${escapeHtml(item.title)}</div>
+      <div class="net-req-card__meta">${escapeHtml(item.company)} • ${escapeHtml(item.location)}</div>
+      <div class="badge-row" style="margin-top:8px">${badge(item.domain)} ${badge(item.kind, "paid")}</div>
+      <div class="net-req-card__body">${escapeHtml(item.description)}</div>
+      <div class="net-req-card__actions">
+        <button class="btn btn--primary" type="button">${UI.requirementTab === "company" ? "Post Similar" : "Express Interest"}</button>
+      </div>
+    </article>
+  `;
+}
+
+function renderNetworking() {
+  const wrap = el("sectionNetworking");
+  const query = UI.networkSearch.trim().toLowerCase();
+  const filteredPeople = NETWORK.people.filter((p) => {
+    if (!query) return true;
+    const text = `${p.name} ${p.role} ${p.skills.join(" ")}`.toLowerCase();
+    return text.includes(query);
+  });
+  const suggested = filteredPeople.filter((p) => p.status !== "connected").slice(0, 6);
+  const reqItems = UI.requirementTab === "company" ? NETWORK.companyPosts : NETWORK.opportunityPosts;
+  wrap.innerHTML = `
+    ${profileCardHtml()}
+    <div class="section">
+      <div class="section__head"><div><div class="section__title">Connections & Discovery</div><div class="section__sub">Send, accept, and discover professionals by skills/domains.</div></div></div>
+      <div class="section__body">
+        <div class="search search--hero" style="max-width:520px">
+          <span class="search__icon" aria-hidden="true">⌕</span>
+          <input id="networkSearch" class="search__input" type="search" placeholder="Search professionals by name, role, skill…" value="${escapeHtml(UI.networkSearch)}" />
+        </div>
+        <div class="net-people-grid">${suggested.map(connectionCardHtml).join("") || `<div class="muted">No profiles match this search.</div>`}</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section__head"><div><div class="section__title">Community Feed</div><div class="section__sub">Industry updates, business trends, and professional discussions.</div></div></div>
+      <div class="section__body"><div class="net-feed">${NETWORK.feed.map(feedCardHtml).join("")}</div></div>
+    </div>
+    <div class="section">
+      <div class="section__head"><div><div class="section__title">Company Requirements Board</div><div class="section__sub">Requirements posted by companies and opportunities for users.</div></div></div>
+      <div class="section__body">
+        <div class="pillbar">
+          <button class="pill ${UI.requirementTab === "company" ? "is-active" : ""}" data-req-tab="company" type="button">Company Posts</button>
+          <button class="pill ${UI.requirementTab === "opportunity" ? "is-active" : ""}" data-req-tab="opportunity" type="button">Opportunities for Users</button>
+        </div>
+        <div class="net-req-grid">${reqItems.map(requirementCardHtml).join("")}</div>
+      </div>
+    </div>
+  `;
+
+  wrap.querySelectorAll("[data-connect]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const person = NETWORK.people.find((p) => p.id === b.dataset.connect);
+      if (!person) return;
+      person.status = "requested";
+      toast("Request sent", `Connection request sent to ${person.name}.`, "ok");
+      renderNetworking();
+    }),
+  );
+  wrap.querySelectorAll("[data-accept]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const person = NETWORK.people.find((p) => p.id === b.dataset.accept);
+      if (!person) return;
+      person.status = "connected";
+      toast("Connected", `You are now connected with ${person.name}.`, "ok");
+      renderNetworking();
+    }),
+  );
+  wrap.querySelectorAll("[data-reject]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const person = NETWORK.people.find((p) => p.id === b.dataset.reject);
+      if (!person) return;
+      person.status = "none";
+      toast("Request rejected", `${person.name}'s request was removed.`, "warn");
+      renderNetworking();
+    }),
+  );
+  wrap.querySelector("#networkSearch")?.addEventListener("input", (e) => {
+    UI.networkSearch = e.target.value || "";
+    renderNetworking();
+  });
+  wrap.querySelectorAll("[data-req-tab]").forEach((b) =>
+    b.addEventListener("click", () => {
+      UI.requirementTab = b.dataset.reqTab;
+      renderNetworking();
+    }),
+  );
+  wrap.querySelector("[data-edit-profile]")?.addEventListener("click", () => {
+    toast("Profile editor", "Editable profile sections are simulated in this prototype.", "warn");
+  });
+}
+
 function renderList() {
   const titleEl = el("pageTitle");
   const subEl = el("pageSubtitle");
@@ -481,9 +690,7 @@ function renderList() {
   subEl.textContent = s;
 
   let items = [];
-  if (UI.route === "hackathons") items = DATA.hackathons;
-  if (UI.route === "workshops") items = DATA.workshops;
-  if (UI.route === "seminars") items = DATA.seminars;
+  if (UI.route === "events") items = [...DATA.hackathons, ...DATA.workshops, ...DATA.seminars];
   if (UI.route === "opportunities") items = [...DATA.opportunities.jobs, ...DATA.opportunities.internships, ...DATA.opportunities.freelancing];
 
   const filtered = applyFilters(items);
@@ -511,10 +718,14 @@ function setRoute(route) {
   document.querySelectorAll(".navlink").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
   el("sectionHome").classList.toggle("is-hidden", route !== "home");
   el("homeEnhancements")?.classList.toggle("is-hidden", route !== "home");
-  el("sectionList").classList.toggle("is-hidden", route === "home");
+  el("sectionList").classList.toggle("is-hidden", route === "home" || route === "networking");
+  el("sectionNetworking").classList.toggle("is-hidden", route !== "networking");
   const [t, s] = listTitleForRoute(route);
   el("pageTitle").textContent = t;
   el("pageSubtitle").textContent = s;
+  const showFilters = route !== "networking";
+  document.querySelector(".filters")?.classList.toggle("is-hidden", !showFilters);
+  document.querySelector(".content__controls")?.classList.toggle("is-hidden", !showFilters);
   render();
   el("app").focus();
 }
@@ -529,6 +740,7 @@ function render() {
   renderStats();
   renderChips();
   if (UI.route === "home") renderHome();
+  else if (UI.route === "networking") renderNetworking();
   else renderList();
   bindCardHandlers();
   refreshDrawerIfOpen();
@@ -1217,7 +1429,7 @@ async function init() {
   });
 
   // Hero shortcuts
-  el("goUpcoming").addEventListener("click", () => setRoute("hackathons"));
+  el("goUpcoming").addEventListener("click", () => setRoute("events"));
   el("goOpportunities").addEventListener("click", () => setRoute("opportunities"));
   document.querySelectorAll("[data-quick-route]").forEach((btn) =>
     btn.addEventListener("click", () => setRoute(btn.dataset.quickRoute)),

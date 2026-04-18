@@ -190,6 +190,23 @@ def get_data():
             "reviews": [
               { "name": "Madhav", "rating": 4, "text": "The requirements were realistic and well scoped." }
             ]
+          },
+          {
+            "id": "hx-job-backend",
+            "type": "job",
+            "title": "Backend Developer (Python/Django)",
+            "company": "NextGen AI",
+            "domain": ["Backend", "AI"],
+            "location": "Bengaluru (On-site)",
+            "salaryMinLPA": 12,
+            "salaryMaxLPA": 20,
+            "verified": True,
+            "trust": 95,
+            "fee": 0,
+            "details": "Design scalable microservices and integrate LLM models into production APIs. Requires strong system design skills.",
+            "reviews": [
+              { "name": "Aditya", "rating": 5, "text": "Challenging interview but a great team to work with." }
+            ]
           }
         ],
         "internships": [
@@ -231,6 +248,44 @@ def get_data():
             "reviews": [
               { "name": "Srishti", "rating": 4, "text": "Great exposure to real product work." }
             ]
+          },
+          {
+            "id": "hx-int-design",
+            "type": "internship",
+            "title": "UI/UX Design Intern",
+            "company": "Creative Minds",
+            "domain": ["Design", "Figma"],
+            "location": "Remote",
+            "schedule": "Part-time",
+            "paid": True,
+            "stipend": 10000,
+            "mode": "online",
+            "verified": True,
+            "trust": 92,
+            "fee": 0,
+            "details": "Assist our lead designers in creating sleek mobile interfaces. Great opportunity for building your portfolio.",
+            "reviews": [
+              { "name": "Neha", "rating": 5, "text": "Very supportive leads and flexible hours." }
+            ]
+          },
+          {
+            "id": "hx-int-marketing",
+            "type": "internship",
+            "title": "Social Media Intern",
+            "company": "BrandBoosters",
+            "domain": ["Marketing", "Social Media"],
+            "location": "Mumbai (Hybrid)",
+            "schedule": "Part-time",
+            "paid": False,
+            "stipend": 0,
+            "mode": "offline",
+            "verified": False,
+            "trust": 75,
+            "fee": 0,
+            "details": "Help curate content and manage campaigns. Unpaid, but offers a strong recommendation letter and hands-on experience.",
+            "reviews": [
+              { "name": "Rahul", "rating": 3, "text": "Unpaid, but good for raw experience." }
+            ]
           }
         ],
         "freelancing": [
@@ -265,6 +320,23 @@ def get_data():
             "details": "Integrate a mock payment provider and implement basic receipt email simulation (no real emails).",
             "reviews": [
               { "name": "Akash", "rating": 4, "text": "Budget and duration were realistic." }
+            ]
+          },
+          {
+            "id": "hx-free-mobile-app",
+            "type": "freelance",
+            "title": "React Native App Fixes",
+            "company": "QuickStart Tech",
+            "domain": ["Mobile", "React Native"],
+            "budget": 25000,
+            "duration": "2 weeks",
+            "verified": True,
+            "trust": 88,
+            "fee": 0,
+            "details": "Fix 3 specific bugs in an existing React Native codebase and deploy to TestFlight.",
+            "reviews": [
+              { "name": "Sneha", "rating": 4, "text": "Clear instructions, prompt payment." },
+              { "name": "Arjun", "rating": 5, "text": "Excellent client to work with." }
             ]
           }
         ]

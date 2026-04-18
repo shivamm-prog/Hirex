@@ -714,6 +714,12 @@ function renderChips() {
 }
 
 function setRoute(route) {
+  // Keep backward compatibility with older quick-route values.
+  const wantsOpportunities = route === "opportunities";
+  if (route === "events" || wantsOpportunities) {
+    route = "home";
+    if (wantsOpportunities) UI.scope = "opps";
+  }
   UI.route = route;
   document.querySelectorAll(".navlink").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
   el("sectionHome").classList.toggle("is-hidden", route !== "home");

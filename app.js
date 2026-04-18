@@ -25,6 +25,15 @@ function moneyINR(amount) {
   return new Intl.NumberFormat(undefined, { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amount);
 }
 
+function salaryLPA(item) {
+  if (item.type !== "job") return null;
+  const min = Number(item.salaryMinLPA);
+  const max = Number(item.salaryMaxLPA);
+  if (!Number.isFinite(min) || !Number.isFinite(max) || min <= 0 || max <= 0) return null;
+  if (min === max) return `${min} LPA`;
+  return `${min}–${max} LPA`;
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -193,6 +202,8 @@ const DATA = {
         company: "BluePeak Labs",
         domain: ["Web", "UI"],
         location: "Remote (India)",
+        salaryMinLPA: 8,
+        salaryMaxLPA: 14,
         verified: true,
         trust: 91,
         fee: 0,
@@ -210,6 +221,8 @@ const DATA = {
         company: "FinSight",
         domain: ["Data", "BI"],
         location: "Pune (Hybrid)",
+        salaryMinLPA: 6,
+        salaryMaxLPA: 10,
         verified: false,
         trust: 78,
         fee: 0,
@@ -634,6 +647,7 @@ function cardHtml(item) {
 
   const chips = (item.domain || []).slice(0, 3).map((d) => badge(d)).join("");
   const feeLine = paid ? `Fee: <b>${escapeHtml(moneyINR(itemFee(item)))}</b>` : `Fee: <b>Free</b>`;
+  const salaryLine = item.type === "job" && salaryLPA(item) ? `Salary: <b>${escapeHtml(salaryLPA(item))}</b>` : "";
 
   return `
     <article class="card" data-open="${escapeHtml(item.id)}" tabindex="0" role="button" aria-label="View details">
@@ -649,6 +663,7 @@ function cardHtml(item) {
       <div class="card__row">
         <div class="kv">
           <div class="kv__item"><span class="dot"></span>${feeLine}</div>
+          ${salaryLine ? `<div class="kv__item"><span class="dot"></span>${salaryLine}</div>` : ""}
           ${
             item.type === "hackathon"
               ? `<div class="kv__item"><span class="dot"></span>Team: <b>${escapeHtml(item.teamSize)}</b></div>`
@@ -935,6 +950,7 @@ function detailsTable(item) {
     rows.push(["Company", item.company || "—"]);
     rows.push(["Role", item.title || "—"]);
     rows.push(["Location", item.location || "—"]);
+    if (item.type === "job") rows.push(["Salary", salaryLPA(item) || "—"]);
     if (item.type === "internship") rows.push(["Schedule", item.schedule || "—"]);
     if (item.type === "internship") rows.push(["Paid", item.paid ? `Yes • ₹${item.stipend}/mo` : "Unpaid"]);
     if (item.type === "freelance") rows.push(["Budget", moneyINR(item.budget || 0)]);

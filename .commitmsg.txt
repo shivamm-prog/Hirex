@@ -1,0 +1,4 @@
+Show job salaries by domain
+
+Add salary ranges to job dummy data and surface the salary on job cards and job detail views for clearer opportunities browsing.
+

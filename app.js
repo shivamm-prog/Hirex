@@ -617,7 +617,7 @@ function renderNetworking() {
     <div class="section">
       <div class="section__head"><div><div class="section__title">Connections & Discovery</div><div class="section__sub">Send, accept, and discover professionals by skills/domains.</div></div></div>
       <div class="section__body">
-        <div class="search search--hero" style="max-width:520px">
+        <div class="search search--hero net-search">
           <span class="search__icon" aria-hidden="true">⌕</span>
           <input id="networkSearch" class="search__input" type="search" placeholder="Search professionals by name, role, skill…" value="${escapeHtml(UI.networkSearch)}" />
         </div>
@@ -724,6 +724,10 @@ function setRoute(route) {
   document.querySelectorAll(".navlink").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
   el("sectionHome").classList.toggle("is-hidden", route !== "home");
   el("homeEnhancements")?.classList.toggle("is-hidden", route !== "home");
+  document.querySelector(".hero--home")?.classList.toggle("is-hidden", route !== "home");
+  el("eventsPillstrip")?.classList.toggle("is-hidden", route === "networking");
+  el("app").classList.toggle("app--networking", route === "networking");
+  document.querySelector(".content .grid")?.classList.toggle("grid--full", route === "networking");
   el("sectionList").classList.toggle("is-hidden", route === "home" || route === "networking");
   el("sectionNetworking").classList.toggle("is-hidden", route !== "networking");
   const [t, s] = listTitleForRoute(route);
@@ -1360,7 +1364,7 @@ async function init() {
     toast("Network Error", "Could not connect to Python backend.", "bad");
   }
 
-  render();
+  setRoute(UI.route);
 
   // Top navigation links
   document.querySelectorAll(".navlink").forEach((b) => b.addEventListener("click", () => setRoute(b.dataset.route)));

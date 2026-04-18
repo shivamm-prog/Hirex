@@ -29,11 +29,6 @@
           </div>
         </div>
 
-        <nav class="topnav" aria-label="Primary navigation">
-          <button class="navlink" data-route="networking" type="button">Network</button>
-          <button class="navlink is-active" data-route="home" type="button">Events & Opportunities</button>
-        </nav>
-
         <div class="topbar__actions" aria-label="User actions">
           <button id="openNotifications" class="icon-btn" type="button" aria-label="Notifications">
             <span aria-hidden="true">🔔</span>
@@ -45,20 +40,46 @@
       </div>
     </header>
 
-    <div class="pillstrip">
-      <div class="container pillstrip__inner">
-        <div class="pillbar" role="group" aria-label="Filter type">
-          <button class="pill is-active" data-filter-scope="all" type="button">All</button>
-          <button class="pill" data-filter-scope="events" type="button">Events</button>
-          <button class="pill" data-filter-scope="opps" type="button">Opportunities</button>
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar-primary" aria-label="Main areas">
+        <div class="sidebar-primary__brand">
+          <span class="sidebar-primary__mark" aria-hidden="true">H</span>
+          <span class="sidebar-primary__title">Hirex</span>
+        </div>
+        <p class="sidebar-primary__hint">Choose a workspace</p>
+        <nav class="sidebar-primary__nav" aria-label="Network or events">
+          <button class="navlink sidebar-navlink" data-route="networking" type="button">
+            <span class="sidebar-navlink__icon" aria-hidden="true">◇</span>
+            <span class="sidebar-navlink__text">
+              <span class="sidebar-navlink__label">Network</span>
+              <span class="sidebar-navlink__sub">Profiles, feed & connections</span>
+            </span>
+          </button>
+          <button class="navlink sidebar-navlink is-active" data-route="home" type="button">
+            <span class="sidebar-navlink__icon" aria-hidden="true">◎</span>
+            <span class="sidebar-navlink__text">
+              <span class="sidebar-navlink__label">Events & Opportunities</span>
+              <span class="sidebar-navlink__sub">Hackathons, jobs & more</span>
+            </span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="app-main-wrap" id="appMainWrap">
+        <div class="pillstrip" id="eventsPillstrip">
+          <div class="container pillstrip__inner">
+            <div class="pillbar" role="group" aria-label="Filter type">
+              <button class="pill is-active" data-filter-scope="all" type="button">All</button>
+              <button class="pill" data-filter-scope="events" type="button">Events</button>
+              <button class="pill" data-filter-scope="opps" type="button">Opportunities</button>
+            </div>
+
+            <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
+          </div>
         </div>
 
-        <button id="openHelp" class="btn btn--ghost" type="button">Policies</button>
-      </div>
-    </div>
-
-    <main id="app" class="app" tabindex="-1">
-      <div class="container">
+        <main id="app" class="app" tabindex="-1">
+          <div class="container" id="appContainer">
         <section class="hero hero--home" aria-label="Hirex homepage hero">
           <div class="hero__inner">
             <h1 class="hero__title">Discover Events & Opportunities That Shape Your Career</h1>
@@ -236,8 +257,10 @@
             </section>
           </div>
         </section>
+          </div>
+        </main>
       </div>
-    </main>
+    </div>
 
     <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 

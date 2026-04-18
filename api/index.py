@@ -347,6 +347,227 @@ def get_data():
       }
     }
 
+
+def minutesAgo(m):
+    dt = datetime.now() - timedelta(minutes=m)
+    return dt.isoformat() + "Z"
+
+NETWORK_DATA = {
+    "me": {
+        "id": "usr-me",
+        "name": "Shivam Gupta",
+        "headline": "Full Stack Developer | Community Builder",
+        "about": "Building practical products, mentoring students, and helping teams ship polished user experiences with measurable impact.",
+        "photo": "SG",
+        "skills": ["React", "Python", "Flask", "UI/UX", "SQL"],
+        "experience": [
+            { "role": "Frontend Developer", "company": "BluePeak Labs", "period": "2024 - Present" },
+            { "role": "Community Lead", "company": "DevCircle", "period": "2022 - 2024" }
+        ],
+        "education": "B.Tech Computer Science • 2025",
+        "projects": ["Hirex Platform", "Campus Mentor Hub"],
+        "contact": "shivam@example.com"
+    },
+    "people": [
+        { "id": "usr-1", "name": "Aditi Sharma", "role": "Product Manager", "skills": ["Product", "Growth", "Analytics"], "mutual": 14, "status": "none" },
+        { "id": "usr-2", "name": "Kunal Mehta", "role": "Software Engineer", "skills": ["Backend", "API", "Python"], "mutual": 9, "status": "connected" },
+        { "id": "usr-3", "name": "Riya Singh", "role": "Data Analyst", "skills": ["SQL", "Power BI", "Finance"], "mutual": 5, "status": "incoming" },
+        { "id": "usr-4", "name": "Dev Patel", "role": "UI/UX Designer", "skills": ["Figma", "Design Systems", "Research"], "mutual": 11, "status": "none" },
+        { "id": "usr-5", "name": "Meera Nair", "role": "Marketing Specialist", "skills": ["Marketing", "Content", "Brand"], "mutual": 6, "status": "none" },
+        { "id": "usr-6", "name": "Harsh Verma", "role": "Cybersecurity Engineer", "skills": ["Security", "SOC", "Cloud"], "mutual": 4, "status": "connected" }
+    ],
+    "feed": [
+        {
+            "id": "nx1",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "APOLLO",
+            "move": "+18%",
+            "moveDir": "up",
+            "title": "Apollo Micro Systems surged 18% on a government license for missile manufacturing",
+            "deck": "The stock rallied sharply following the critical defense clearance.",
+            "body": "Investors cheered the approval, viewing it as a major catalyst for the company's defense footprint. Trading volumes spiked to multi-month highs during morning trade.",
+            "source": "MarketWire Defense",
+            "at": minutesAgo(1)
+        },
+        {
+            "id": "nx2",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "GUJGAS",
+            "move": "+8%",
+            "moveDir": "up",
+            "title": "Gujarat Gas jumped 8% following a rating upgrade to 'buy'",
+            "deck": "Multiple brokerages turned bullish citing improved margin visibility.",
+            "body": "The rating upgrades pointed to easing raw material costs and stabilizing industrial demand, prompting aggressive buying from institutional desks across the board.",
+            "source": "CapitalDesk",
+            "at": minutesAgo(3)
+        },
+        {
+            "id": "n1",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "NIFTY 50",
+            "move": "+0.58%",
+            "moveDir": "up",
+            "title": "Nifty reclaims 24,200 as IT majors lift benchmarks",
+            "deck": "Buying returned across large-caps after a steady start to the session.",
+            "body": "Traders pointed to fresh allocations in software services and selective PSU banks.",
+            "source": "MarketWire Live",
+            "at": minutesAgo(5)
+        },
+        {
+            "id": "n2",
+            "category": "markets",
+            "breaking": False,
+            "ticker": "SENSEX",
+            "move": "+0.41%",
+            "moveDir": "up",
+            "title": "Sensex extends gains; investors watch currency and crude",
+            "deck": "The rupee and Brent moves are in focus.",
+            "body": "Desk commentary highlights a preference for quality balance sheets.",
+            "source": "CapitalDesk",
+            "at": minutesAgo(18)
+        },
+        {
+            "id": "n5",
+            "category": "tech",
+            "breaking": True,
+            "title": "Chip majors signal sustained AI accelerator demand through 2026",
+            "deck": "Cloud hyperscalers are still expanding GPU clusters.",
+            "body": "Supply chains for advanced packaging remain tight.",
+            "source": "Silicon Brief",
+            "at": minutesAgo(7)
+        }
+    ],
+    "companyPosts": [
+        { "id": "req-1", "title": "Hiring: Junior Frontend Engineer", "company": "BluePeak Labs", "domain": "Web", "location": "Remote", "kind": "Job", "description": "Need strong React fundamentals, API integration." },
+        { "id": "req-2", "title": "Need UI Audit Consultant", "company": "NovaMart", "domain": "UI/UX", "location": "Mumbai", "kind": "Service", "description": "Looking for UI experts to audit journeys." }
+    ],
+    "opportunityPosts": [
+        { "id": "op-1", "title": "Hiring Need: Data Intern", "company": "FinSight", "domain": "Data", "location": "Pune", "kind": "Hiring need", "description": "Internship role for dashboarding, reporting." },
+        { "id": "op-2", "title": "Open Requirement: Security Analyst", "company": "SecureOps Guild", "domain": "Security", "location": "Delhi", "kind": "Job", "description": "Entry role for threat detection." }
+    ]
+}
+          {
+            "id": "hx-free-ui-audit",
+            "type": "freelance",
+            "title": "Landing Page UI Audit + Refresh",
+            "company": "NovaMart",
+            "domain": ["UI/UX", "Web"],
+"title": "Landing Page UI Audit + Refresh",
+          "company": "NovaMart",
+          "domain": ["UI/UX", "Web"],
+          "budget": 12000,
+          "duration": "1 week",
+          "verified": True,
+          "trust": 93,
+          "fee": 0,
+          "details": "Audit spacing, hierarchy, and conversion flow.def minutesAgo(m):
+    dt = datetime.now() - timedelta(minutes=m)
+    return dt.isoformat() + "Z"
+
+NETWORK_DATA = {
+    "me": {
+        "id": "usr-me",
+        "name": "Shivam Gupta",
+        "headline": "Full Stack Developer | Community Builder",
+        "about": "Building practical products, mentoring students, and helping teams ship polished user experiences with measurable impact.",
+        "photo": "SG",
+        "skills": ["React", "Python", "Flask", "UI/UX", "SQL"],
+        "experience": [
+            { "role": "Frontend Developer", "company": "BluePeak Labs", "period": "2024 - Present" },
+            { "role": "Community Lead", "company": "DevCircle", "period": "2022 - 2024" }
+        ],
+        "education": "B.Tech Computer Science • 2025",
+        "projects": ["Hirex Platform", "Campus Mentor Hub"],
+        "contact": "shivam@example.com"
+    },
+    "people": [
+        { "id": "usr-1", "name": "Aditi Sharma", "role": "Product Manager", "skills": ["Product", "Growth", "Analytics"], "mutual": 14, "status": "none" },
+        { "id": "usr-2", "name": "Kunal Mehta", "role": "Software Engineer", "skills": ["Backend", "API", "Python"], "mutual": 9, "status": "connected" },
+        { "id": "usr-3", "name": "Riya Singh", "role": "Data Analyst", "skills": ["SQL", "Power BI", "Finance"], "mutual": 5, "status": "incoming" },
+        { "id": "usr-4", "name": "Dev Patel", "role": "UI/UX Designer", "skills": ["Figma", "Design Systems", "Research"], "mutual": 11, "status": "none" },
+        { "id": "usr-5", "name": "Meera Nair", "role": "Marketing Specialist", "skills": ["Marketing", "Content", "Brand"], "mutual": 6, "status": "none" },
+        { "id": "usr-6", "name": "Harsh Verma", "role": "Cybersecurity Engineer", "skills": ["Security", "SOC", "Cloud"], "mutual": 4, "status": "connected" }
+    ],
+    "feed": [
+        {
+            "id": "nx1",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "APOLLO",
+            "move": "+18%",
+            "moveDir": "up",
+            "title": "Apollo Micro Systems surged 18% on a government license for missile manufacturing",
+            "deck": "The stock rallied sharply following the critical defense clearance.",
+            "body": "Investors cheered the approval, viewing it as a major catalyst for the company's defense footprint. Trading volumes spiked to multi-month highs.",
+            "source": "MarketWire Defense",
+            "at": minutesAgo(1)
+        },
+        {
+            "id": "nx2",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "GUJGAS",
+            "move": "+8%",
+            "moveDir": "up",
+            "title": "Gujarat Gas jumped 8% following a rating upgrade to 'buy'",
+            "deck": "Multiple brokerages turned bullish citing improved margin visibility.",
+            "body": "The rating upgrades pointed to easing raw material costs and stabilizing industrial demand, prompting aggressive buying.",
+            "source": "CapitalDesk",
+            "at": minutesAgo(3)
+        },
+        {
+            "id": "n1",
+            "category": "markets",
+            "breaking": True,
+            "ticker": "NIFTY 50",
+            "move": "+0.58%",
+            "moveDir": "up",
+            "title": "Nifty reclaims 24,200 as IT majors lift benchmarks",
+            "deck": "Buying returned across large-caps after a steady start.",
+            "body": "Traders pointed to fresh allocations in software services and selective PSU banks.",
+            "source": "MarketWire Live",
+            "at": minutesAgo(5)
+        },
+        {
+            "id": "n2",
+            "category": "markets",
+            "breaking": False,
+            "ticker": "SENSEX",
+            "move": "+0.41%",
+            "moveDir": "up",
+            "title": "Sensex extends gains; investors watch currency and crude",
+            "deck": "The rupee and Brent moves are in focus.",
+            "body": "Desk commentary highlights a preference for quality balance sheets.",
+            "source": "CapitalDesk",
+            "at": minutesAgo(18)
+        },
+        {
+            "id": "n5",
+            "category": "tech",
+            "breaking": True,
+            "title": "Chip majors signal sustained AI accelerator demand through 2026",
+            "deck": "Cloud hyperscalers are still expanding GPU clusters.",
+            "body": "Supply chains for advanced packaging remain tight.",
+            "source": "Silicon Brief",
+            "at": minutesAgo(7)
+        }
+    ],
+    "companyPosts": [
+        { "id": "req-1", "title": "Hiring: Junior Frontend Engineer", "company": "BluePeak Labs", "domain": "Web", "location": "Remote", "kind": "Job", "description": "Need strong React fundamentals, API integration." },
+        { "id": "req-2", "title": "Need UI Audit Consultant", "company": "NovaMart", "domain": "UI/UX", "location": "Mumbai", "kind": "Service", "description": "Looking for UI experts to audit journeys." }
+    ],
+    "opportunityPosts": [
+        { "id": "op-1", "title": "Hiring Need: Data Intern", "company": "FinSight", "domain": "Data", "location": "Pune", "kind": "Hiring need", "description": "Internship role for dashboarding, reporting." },
+        { "id": "op-2", "title": "Open Requirement: Security Analyst", "company": "SecureOps Guild", "domain": "Security", "location": "Delhi", "kind": "Job", "description": "Entry role for threat detection." }
+    ]
+}
+
+# Dummy in-memory DB for states
+# In a real app this would be tied to user sessions/IDs
+
 def ensure_state_file():
     os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
     if not os.path.exists(STATE_FILE):
@@ -379,6 +600,40 @@ state_db = load_state()
 
 
 
+def get_network_data():
+    global state_db
+    conns = state_db.get("connections", {})
+    # Deep copy to avoid mutating global template
+    data = json.loads(json.dumps(NETWORK_DATA))
+    for p in data["people"]:
+        if p["id"] in conns:
+            p["status"] = conns[p["id"]]
+    return data
+
+@app.route('/api/network', methods=['GET'])
+def get_network_details():
+    return jsonify(get_network_data())
+
+@app.route('/api/network/connect', methods=['POST'])
+def network_connect():
+    global state_db
+    req = request.json
+    target_id = req.get('userId')
+    action = req.get('action') # "connect", "accept", "reject"
+    
+    if "connections" not in state_db:
+        state_db["connections"] = {}
+        
+    if action == "connect":
+        state_db["connections"][target_id] = "requested"
+    elif action == "accept":
+        state_db["connections"][target_id] = "connected"
+    elif action == "reject":
+        state_db["connections"][target_id] = "none"
+        
+    save_state(state_db)
+    return jsonify(get_network_data())
+
 @app.route('/api/data', methods=['GET'])
 def get_all_data():
     return jsonify(get_data())
@@ -398,6 +653,7 @@ def reset_state():
     global state_db
     state_db["registrations"] = {}
     state_db["saves"] = {}
+    state_db["connections"] = {}
     save_state(state_db)
     return jsonify({"message": "State reset", "state": state_db})
 

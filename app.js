@@ -79,161 +79,7 @@ const UI = {
 
 const el = (id) => document.getElementById(id);
 let state = { registrations: {}, saves: {} };
-
-const NETWORK = {
-  me: {
-    id: "usr-me",
-    name: "Shivam Gupta",
-    headline: "Full Stack Developer | Community Builder",
-    about:
-      "Building practical products, mentoring students, and helping teams ship polished user experiences with measurable impact.",
-    photo: "SG",
-    skills: ["React", "Python", "Flask", "UI/UX", "SQL"],
-    experience: [
-      { role: "Frontend Developer", company: "BluePeak Labs", period: "2024 - Present" },
-      { role: "Community Lead", company: "DevCircle", period: "2022 - 2024" },
-    ],
-    education: "B.Tech Computer Science • 2025",
-    projects: ["Hirex Platform", "Campus Mentor Hub"],
-    contact: "shivam@example.com",
-  },
-  people: [
-    { id: "usr-1", name: "Aditi Sharma", role: "Product Manager", skills: ["Product", "Growth", "Analytics"], mutual: 14, status: "none" },
-    { id: "usr-2", name: "Kunal Mehta", role: "Software Engineer", skills: ["Backend", "API", "Python"], mutual: 9, status: "connected" },
-    { id: "usr-3", name: "Riya Singh", role: "Data Analyst", skills: ["SQL", "Power BI", "Finance"], mutual: 5, status: "incoming" },
-    { id: "usr-4", name: "Dev Patel", role: "UI/UX Designer", skills: ["Figma", "Design Systems", "Research"], mutual: 11, status: "none" },
-    { id: "usr-5", name: "Meera Nair", role: "Marketing Specialist", skills: ["Marketing", "Content", "Brand"], mutual: 6, status: "none" },
-    { id: "usr-6", name: "Harsh Verma", role: "Cybersecurity Engineer", skills: ["Security", "SOC", "Cloud"], mutual: 4, status: "connected" },
-  ],
-  feed: [
-    {
-      id: "nx1",
-      category: "markets",
-      breaking: true,
-      ticker: "APOLLO",
-      move: "+18%",
-      moveDir: "up",
-      title: "Apollo Micro Systems surged 18% on a government license for missile manufacturing",
-      deck: "The stock rallied sharply following the critical defense clearance.",
-      body: "Investors cheered the approval, viewing it as a major catalyst for the company's defense footprint. Trading volumes spiked to multi-month highs during morning trade.",
-      source: "MarketWire Defense",
-      at: minutesAgo(1),
-    },
-    {
-      id: "nx2",
-      category: "markets",
-      breaking: true,
-      ticker: "GUJGAS",
-      move: "+8%",
-      moveDir: "up",
-      title: "Gujarat Gas jumped 8% following a rating upgrade to 'buy'",
-      deck: "Multiple brokerages turned bullish citing improved margin visibility.",
-      body: "The rating upgrades pointed to easing raw material costs and stabilizing industrial demand, prompting aggressive buying from institutional desks across the board.",
-      source: "CapitalDesk",
-      at: minutesAgo(3),
-    },
-    {
-      id: "n1",
-      category: "markets",
-      breaking: true,
-      ticker: "NIFTY 50",
-      move: "+0.58%",
-      moveDir: "up",
-      title: "Nifty reclaims 24,200 as IT majors lift benchmarks",
-      deck: "Buying returned across large-caps after a steady start to the session, with breadth improving through the afternoon.",
-      body: "Traders pointed to fresh allocations in software services and selective PSU banks as sentiment steadied. Volatility cooled slightly versus last week, though global cues remain the swing factor for near-term direction.",
-      source: "MarketWire Live",
-      at: minutesAgo(5),
-    },
-    {
-      id: "n2",
-      category: "markets",
-      breaking: false,
-      ticker: "SENSEX",
-      move: "+0.41%",
-      moveDir: "up",
-      title: "Sensex extends gains; investors watch currency and crude",
-      deck: "The rupee and Brent moves are in focus ahead of overseas inflation prints.",
-      body: "Desk commentary highlights a preference for quality balance sheets and exporters hedging FX exposure. Mid-caps lagged briefly but participation ticked higher in the final hour.",
-      source: "CapitalDesk",
-      at: minutesAgo(18),
-    },
-    {
-      id: "n3",
-      category: "markets",
-      breaking: false,
-      ticker: "BANK NIFTY",
-      move: "-0.22%",
-      moveDir: "down",
-      title: "Bank Nifty slips as traders book profits after a strong run",
-      deck: "Private lenders saw two-way action while PSU names held relatively firm.",
-      body: "Analysts note that credit growth narratives remain intact, but short-term positioning is lighter ahead of scheduled macro data. Flows from domestic institutions stayed net supportive on dips.",
-      source: "TradeStream",
-      at: minutesAgo(42),
-    },
-    {
-      id: "n4",
-      category: "markets",
-      breaking: true,
-      ticker: "USD/INR",
-      move: "-0.05%",
-      moveDir: "flat",
-      title: "Rupee steady as RBI watchers flag balanced liquidity stance",
-      deck: "FX desks report range-bound trading with importers and exporters offsetting each other.",
-      body: "Policy expectations are priced for continuity, with emphasis on anchoring inflation expectations. Offshore dollar moves overnight will set the tone for Monday’s opening.",
-      source: "FX Pulse India",
-      at: minutesAgo(63),
-    },
-    {
-      id: "n5",
-      category: "tech",
-      breaking: true,
-      title: "Chip majors signal sustained AI accelerator demand through 2026",
-      deck: "Cloud hyperscalers are still expanding GPU clusters for training and inference workloads.",
-      body: "Supply chains for advanced packaging remain tight, pushing lead times for high-end accelerators. Enterprise buyers are shifting budgets toward retrieval-augmented stacks and smaller fine-tuned models to control cost per token.",
-      source: "Silicon Brief",
-      at: minutesAgo(7),
-    },
-    {
-      id: "n6",
-      category: "tech",
-      breaking: false,
-      title: "Major cloud providers post resilient enterprise spend on data and AI services",
-      deck: "Consumption-based revenue grew even as customers optimize legacy footprints.",
-      body: "CFO commentary emphasized multi-year commitments on analytics and security SKUs. Partners report stronger pipeline for migration plus modernization bundles rather than lift-and-shift alone.",
-      source: "Cloud Ledger",
-      at: minutesAgo(26),
-    },
-    {
-      id: "n7",
-      category: "tech",
-      breaking: false,
-      title: "EU AI Act implementation spurs tooling rush for compliance and documentation",
-      deck: "Vendors are bundling risk registers, eval harnesses, and audit trails for model releases.",
-      body: "Legal and engineering teams are collaborating earlier in the SDLC. Mid-size SaaS firms are prioritizing EU deployments with transparent logging to avoid rework when rules tighten further.",
-      source: "Policy & Code",
-      at: minutesAgo(55),
-    },
-    {
-      id: "n8",
-      category: "tech",
-      breaking: false,
-      title: "Indian SaaS and devtools startups raise follow-on rounds on strong NRR",
-      deck: "Investors cite durable expansion revenue and India-first GTM before global scale.",
-      body: "Founders highlighted tighter CAC payback and community-led adoption on campuses as differentiators. Secondary interest is rising for employee liquidity in later-stage names.",
-      source: "Startup Circuit",
-      at: minutesAgo(120),
-    },
-  ],
-  companyPosts: [
-    { id: "req-1", title: "Hiring: Junior Frontend Engineer", company: "BluePeak Labs", domain: "Web", location: "Remote", kind: "Job", description: "Need strong React fundamentals, API integration, and component-driven development." },
-    { id: "req-2", title: "Need UI Audit Consultant", company: "NovaMart", domain: "UI/UX", location: "Mumbai", kind: "Service", description: "Looking for UI experts to audit onboarding and checkout journeys." },
-  ],
-  opportunityPosts: [
-    { id: "op-1", title: "Hiring Need: Data Intern", company: "FinSight", domain: "Data", location: "Pune", kind: "Hiring need", description: "Internship role for dashboarding, reporting, and SQL-based analysis." },
-    { id: "op-2", title: "Open Requirement: Security Analyst", company: "SecureOps Guild", domain: "Security", location: "Delhi", kind: "Job", description: "Entry role for threat detection, incident triage, and reporting workflows." },
-  ],
-};
+let NETWORK = null;
 
 const chipConfig = [
   { id: "recommended", label: "Recommended" },
@@ -840,30 +686,39 @@ function renderNetworking() {
   `;
 
   wrap.querySelectorAll("[data-connect]").forEach((b) =>
-    b.addEventListener("click", () => {
+    b.addEventListener("click", async () => {
       const person = NETWORK.people.find((p) => p.id === b.dataset.connect);
       if (!person) return;
-      person.status = "requested";
-      toast("Request sent", `Connection request sent to ${person.name}.`, "ok");
-      renderNetworking();
+      const res = await fetch("/api/network/connect", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({userId: person.id, action: "connect"}) });
+      if (res.ok) {
+        NETWORK = await res.json();
+        toast("Request sent", `Connection request sent to ${person.name}.`, "ok");
+        renderNetworking();
+      }
     }),
   );
   wrap.querySelectorAll("[data-accept]").forEach((b) =>
-    b.addEventListener("click", () => {
+    b.addEventListener("click", async () => {
       const person = NETWORK.people.find((p) => p.id === b.dataset.accept);
       if (!person) return;
-      person.status = "connected";
-      toast("Connected", `You are now connected with ${person.name}.`, "ok");
-      renderNetworking();
+      const res = await fetch("/api/network/connect", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({userId: person.id, action: "accept"}) });
+      if (res.ok) {
+        NETWORK = await res.json();
+        toast("Connected", `You are now connected with ${person.name}.`, "ok");
+        renderNetworking();
+      }
     }),
   );
   wrap.querySelectorAll("[data-reject]").forEach((b) =>
-    b.addEventListener("click", () => {
+    b.addEventListener("click", async () => {
       const person = NETWORK.people.find((p) => p.id === b.dataset.reject);
       if (!person) return;
-      person.status = "none";
-      toast("Request rejected", `${person.name}'s request was removed.`, "warn");
-      renderNetworking();
+      const res = await fetch("/api/network/connect", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({userId: person.id, action: "reject"}) });
+      if (res.ok) {
+        NETWORK = await res.json();
+        toast("Request rejected", `${person.name}'s request was removed.`, "warn");
+        renderNetworking();
+      }
     }),
   );
   wrap.querySelector("#networkSearch")?.addEventListener("input", (e) => {
@@ -1562,9 +1417,10 @@ function renderPayScreen(item, payload) {
 
 async function init() {
   try {
-    const [dRes, sRes] = await Promise.all([fetch("/api/data"), fetch("/api/state")]);
+    const [dRes, sRes, nRes] = await Promise.all([fetch("/api/data"), fetch("/api/state"), fetch("/api/network")]);
     DATA = await dRes.json();
     state = await sRes.json();
+    NETWORK = await nRes.json();
   } catch (err) {
     console.error("Backend not reachable", err);
     toast("Network Error", "Could not connect to Python backend.", "bad");

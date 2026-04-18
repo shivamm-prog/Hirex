@@ -385,6 +385,46 @@ function sectionHtml(title, subtitle, items) {
   `;
 }
 
+function spotlightCardHtml(item) {
+  const meta = isEvent(item)
+    ? `${item.type[0].toUpperCase() + item.type.slice(1)} • ${item.venue || item.mode || "Event"}`
+    : `${item.company || "Company"} • ${item.location || item.mode || "Opportunity"}`;
+  const salary = item.type === "job" ? salaryLPA(item) : null;
+  const moneyLine = salary
+    ? `Salary: ${salary}`
+    : item.type === "internship"
+      ? item.paid
+        ? `Stipend: ₹${item.stipend}/mo`
+        : "Unpaid internship"
+      : item.type === "freelance"
+        ? `Budget: ${moneyINR(item.budget || 0)}`
+        : itemIsPaid(item)
+          ? `Fee: ${moneyINR(itemFee(item))}`
+          : "Free";
+
+  return `
+    <article class="spot-card">
+      <div class="spot-card__top">
+        <div>
+          <div class="spot-card__title">${escapeHtml(item.title)}</div>
+          <div class="spot-card__meta">${escapeHtml(meta)}</div>
+        </div>
+        <div class="badge-row">
+          ${item.verified ? badge("Verified", "verified") : ""}
+          ${badge(`Trust ${item.trust || "—"}`, "trust")}
+        </div>
+      </div>
+      <div class="badge-row" style="margin-top:10px">
+        ${(item.domain || []).slice(0, 2).map((d) => badge(d)).join("")}
+      </div>
+      <div class="spot-card__foot">
+        <div class="kv__item"><span class="dot"></span>${escapeHtml(moneyLine)}</div>
+        <button class="btn btn--ghost" data-spot-open="${escapeHtml(item.id)}" type="button">View</button>
+      </div>
+    </article>
+  `;
+}
+
 function renderHome() {
   const regItems = Object.keys(state.registrations)
     .map((id) => allItemsFlat().find((x) => x.id === id))
@@ -395,6 +435,17 @@ function renderHome() {
     .slice(0, 4);
 
   const suggestions = applyFilters(allItemsFlat()).slice(0, 6);
+  const all = allItemsFlat();
+  const trending = applyFilters(all)
+    .sort((a, b) => (b.trust || 0) - (a.trust || 0))
+    .slice(0, 8);
+  const spotlight = applyFilters(all)
+    .filter((x) => x.verified)
+    .sort((a, b) => (b.trust || 0) - (a.trust || 0))
+    .slice(0, 8);
+  const paidCount = all.filter((x) => itemIsPaid(x)).length;
+  const freeCount = all.filter((x) => !itemIsPaid(x)).length;
+  const jobsCount = (DATA.opportunities?.jobs || []).length;
 
   const home = el("sectionHome");
   home.innerHTML = [
@@ -402,6 +453,24 @@ function renderHome() {
     sectionHtml("Registered / applied", "Your saved state persists locally in this demo.", regItems),
     sectionHtml("Recommended for you", "Based on trust, verification, and your current filters.", suggestions),
   ].join("");
+
+  const ticker = el("trendTicker");
+  if (ticker) {
+    const line = trending
+      .map((i) => `${i.title} (${(i.domain || []).slice(0, 1).join("") || i.type})`)
+      .join("  •  ");
+    ticker.textContent = `${line}  •  ${line}`;
+  }
+  if (el("pulsePaid")) el("pulsePaid").textContent = String(paidCount);
+  if (el("pulseFree")) el("pulseFree").textContent = String(freeCount);
+  if (el("pulseJobs")) el("pulseJobs").textContent = String(jobsCount);
+  if (el("spotlightRow")) {
+    el("spotlightRow").innerHTML =
+      spotlight.map(spotlightCardHtml).join("") || `<div class="muted">No spotlight items right now.</div>`;
+    el("spotlightRow")
+      .querySelectorAll("[data-spot-open]")
+      .forEach((btn) => btn.addEventListener("click", () => openDetails(btn.dataset.spotOpen)));
+  }
 }
 
 function renderList() {
@@ -441,6 +510,7 @@ function setRoute(route) {
   UI.route = route;
   document.querySelectorAll(".navlink").forEach((b) => b.classList.toggle("is-active", b.dataset.route === route));
   el("sectionHome").classList.toggle("is-hidden", route !== "home");
+  el("homeEnhancements")?.classList.toggle("is-hidden", route !== "home");
   el("sectionList").classList.toggle("is-hidden", route === "home");
   const [t, s] = listTitleForRoute(route);
   el("pageTitle").textContent = t;
@@ -1149,6 +1219,9 @@ async function init() {
   // Hero shortcuts
   el("goUpcoming").addEventListener("click", () => setRoute("hackathons"));
   el("goOpportunities").addEventListener("click", () => setRoute("opportunities"));
+  document.querySelectorAll("[data-quick-route]").forEach((btn) =>
+    btn.addEventListener("click", () => setRoute(btn.dataset.quickRoute)),
+  );
 
   // Navbar polish: subtle shadow on scroll
   const topbar = el("topbar");

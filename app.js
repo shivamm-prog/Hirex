@@ -34,283 +34,7 @@ function salaryLPA(item) {
   return `${min}–${max} LPA`;
 }
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { registrations: {}, saves: {} };
-    const parsed = JSON.parse(raw);
-    return { registrations: parsed.registrations || {}, saves: parsed.saves || {} };
-  } catch {
-    return { registrations: {}, saves: {} };
-  }
-}
-
-function saveState(next) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-}
-
-const DATA = {
-  hackathons: [
-    {
-      id: "hx-hack-neoai",
-      type: "hackathon",
-      title: "NeoAI Build Sprint",
-      venue: "Bengaluru • Hirex Arena",
-      mode: "offline",
-      domain: ["AI", "Product", "LLMs"],
-      startAt: daysFromNow(6),
-      duration: "36 hours",
-      teamSize: "2–4",
-      fee: 499,
-      verified: true,
-      trust: 92,
-      details:
-        "A fast-paced, team-based hackathon focused on practical AI products. Build an end-to-end prototype with a crisp pitch and measurable impact.",
-      reviews: [
-        { name: "Aditi Sharma", rating: 5, text: "Great event, well organized. Mentors were super helpful." },
-        { name: "Kunal Mehta", rating: 4, text: "Solid problems and smooth registration process." },
-        { name: "Riya Singh", rating: 5, text: "Loved the venue and the judging quality." },
-        { name: "Dev Patel", rating: 4, text: "Well-managed schedule and good networking." },
-      ],
-    },
-    {
-      id: "hx-hack-blueweb",
-      type: "hackathon",
-      title: "BlueWeb Hackfest",
-      venue: "Online • Live Rooms",
-      mode: "online",
-      domain: ["Web", "DevTools", "Open Source"],
-      startAt: daysFromNow(3),
-      duration: "24 hours",
-      teamSize: "1–3",
-      fee: 0,
-      verified: true,
-      trust: 88,
-      details:
-        "A clean, web-first hackathon with starter kits and short technical workshops. Great for students who want a realistic sprint experience.",
-      reviews: [
-        { name: "Sana Khan", rating: 5, text: "Very useful workshop + hack combo. Great resources." },
-        { name: "Arjun Rao", rating: 4, text: "Smooth and beginner-friendly. Good pacing." },
-        { name: "Neha Verma", rating: 4, text: "Loved the project themes and quick feedback." },
-      ],
-    },
-    {
-      id: "hx-hack-fintech",
-      type: "hackathon",
-      title: "FinTech Forge Weekend",
-      venue: "Mumbai • Skyline Hub",
-      mode: "offline",
-      domain: ["FinTech", "Data", "Security"],
-      startAt: daysFromNow(12),
-      duration: "48 hours",
-      teamSize: "3–5",
-      fee: 799,
-      verified: false,
-      trust: 79,
-      details:
-        "Build secure fintech workflows—onboarding, fraud checks, and reconciliation. Includes a product track and a security track with focused evaluations.",
-      reviews: [
-        { name: "Ishaan Gupta", rating: 4, text: "Challenging tracks, good judges, realistic use-cases." },
-        { name: "Meera Nair", rating: 3, text: "Great content, though onboarding could be tighter." },
-      ],
-    },
-  ],
-  workshops: [
-    {
-      id: "hx-ws-uiux",
-      type: "workshop",
-      title: "Modern UI/UX for Product Teams",
-      organizer: "Hirex Studio",
-      mode: "online",
-      domain: ["UI/UX", "Design Systems"],
-      startAt: daysFromNow(2),
-      duration: "2 hours",
-      fee: 199,
-      verified: true,
-      trust: 94,
-      details:
-        "Learn spacing, hierarchy, and component thinking. Includes a mini design-audit framework and practical templates.",
-      reviews: [
-        { name: "Priya", rating: 5, text: "Very useful workshop. Clear structure and examples." },
-        { name: "Kabir", rating: 4, text: "Great pacing and hands-on exercises." },
-        { name: "Sanjay", rating: 5, text: "Clean explanations and super practical tips." },
-      ],
-    },
-    {
-      id: "hx-ws-mlops",
-      type: "workshop",
-      title: "MLOps Starter: Deploy & Monitor",
-      organizer: "CloudCraft Academy",
-      mode: "offline",
-      domain: ["AI", "MLOps", "Cloud"],
-      startAt: daysFromNow(9),
-      duration: "4 hours",
-      fee: 0,
-      verified: true,
-      trust: 87,
-      details: "A practical workshop covering deployment patterns, monitoring signals, and reliability basics for ML systems.",
-      reviews: [
-        { name: "Tanvi", rating: 4, text: "Good hands-on labs. Helpful instructor." },
-        { name: "Rohit", rating: 4, text: "Solid intro and realistic deployment scenarios." },
-      ],
-    },
-  ],
-  seminars: [
-    {
-      id: "hx-sem-career",
-      type: "seminar",
-      title: "Career Roadmaps: From Student to SDE",
-      host: "Hirex Community",
-      organizer: "TechTalks India",
-      mode: "online",
-      startAt: daysFromNow(1),
-      duration: "75 mins",
-      fee: 0,
-      verified: true,
-      trust: 90,
-      details: "A structured seminar on portfolios, interview prep, and building momentum with consistent projects.",
-      reviews: [
-        { name: "Ananya", rating: 5, text: "Great clarity and actionable steps." },
-        { name: "Vikram", rating: 4, text: "Very helpful Q&A session." },
-      ],
-    },
-    {
-      id: "hx-sem-cyber",
-      type: "seminar",
-      title: "Security for Builders: Practical Threat Modeling",
-      host: "SecureOps Guild",
-      organizer: "SecureOps Guild",
-      mode: "offline",
-      startAt: daysFromNow(7),
-      duration: "90 mins",
-      fee: 299,
-      verified: false,
-      trust: 82,
-      details: "Learn realistic threat modeling in small steps and apply it to common product features.",
-      reviews: [
-        { name: "Harsh", rating: 4, text: "Good examples and simple frameworks." },
-        { name: "Nidhi", rating: 4, text: "Made security feel approachable." },
-      ],
-    },
-  ],
-  opportunities: {
-    jobs: [
-      {
-        id: "hx-job-frontend",
-        type: "job",
-        title: "Frontend Engineer (React)",
-        company: "BluePeak Labs",
-        domain: ["Web", "UI"],
-        location: "Remote (India)",
-        salaryMinLPA: 8,
-        salaryMaxLPA: 14,
-        verified: true,
-        trust: 91,
-        fee: 0,
-        details:
-          "Build crisp UI experiences with strong component discipline. You'll collaborate with designers and ship weekly improvements.",
-        reviews: [
-          { name: "Nitin", rating: 5, text: "Quick application flow and transparent updates." },
-          { name: "Ira", rating: 4, text: "Clear role description and responsive recruiter." },
-        ],
-      },
-      {
-        id: "hx-job-data",
-        type: "job",
-        title: "Data Analyst",
-        company: "FinSight",
-        domain: ["Data", "BI"],
-        location: "Pune (Hybrid)",
-        salaryMinLPA: 6,
-        salaryMaxLPA: 10,
-        verified: false,
-        trust: 78,
-        fee: 0,
-        details: "Work on dashboards and insights that power product decisions. Strong SQL + visualization focus.",
-        reviews: [
-          { name: "Madhav", rating: 4, text: "The requirements were realistic and well scoped." },
-        ],
-      },
-    ],
-    internships: [
-      {
-        id: "hx-int-ml",
-        type: "internship",
-        title: "ML Intern",
-        company: "CloudCraft Academy",
-        domain: ["AI", "Data"],
-        location: "Online",
-        schedule: "Part-time",
-        paid: true,
-        stipend: 15000,
-        mode: "online",
-        verified: true,
-        trust: 89,
-        fee: 0,
-        details: "Build datasets, train baseline models, and help with evaluation harnesses. Weekly mentor check-ins.",
-        reviews: [
-          { name: "Pooja", rating: 5, text: "Great mentorship and clear tasks." },
-          { name: "Yash", rating: 4, text: "Good learning curve and friendly team." },
-        ],
-      },
-      {
-        id: "hx-int-product",
-        type: "internship",
-        title: "Product Intern",
-        company: "Hirex Studio",
-        domain: ["Product", "Research"],
-        location: "Delhi (On-site)",
-        schedule: "Full-time",
-        paid: false,
-        stipend: 0,
-        mode: "offline",
-        verified: true,
-        trust: 86,
-        fee: 0,
-        details: "Help run user interviews, convert insights into specs, and support experiments on onboarding flows.",
-        reviews: [
-          { name: "Srishti", rating: 4, text: "Great exposure to real product work." },
-        ],
-      },
-    ],
-    freelancing: [
-      {
-        id: "hx-free-ui-audit",
-        type: "freelance",
-        title: "Landing Page UI Audit + Refresh",
-        company: "NovaMart",
-        domain: ["UI/UX", "Web"],
-        budget: 12000,
-        duration: "1 week",
-        verified: true,
-        trust: 93,
-        fee: 0,
-        details:
-          "Audit spacing, hierarchy, and conversion flow. Deliver a refreshed UI with 3 sections, responsive layout, and component guidelines.",
-        reviews: [
-          { name: "Farhan", rating: 5, text: "The client brief was clear; proposal submission was smooth." },
-          { name: "Shreya", rating: 4, text: "Good listing quality and quick responses." },
-        ],
-      },
-      {
-        id: "hx-free-backend-api",
-        type: "freelance",
-        title: "API Integration (Payments Mock)",
-        company: "FinSight",
-        domain: ["Backend", "API"],
-        budget: 18000,
-        duration: "10 days",
-        verified: false,
-        trust: 77,
-        fee: 0,
-        details: "Integrate a mock payment provider and implement basic receipt email simulation (no real emails).",
-        reviews: [
-          { name: "Akash", rating: 4, text: "Budget and duration were realistic." },
-        ],
-      },
-    ],
-  },
-};
+let DATA = { hackathons: [], workshops: [], seminars: [], opportunities: { jobs: [], internships: [], freelancing: [] } };
 
 const UI = {
   route: "home",
@@ -336,7 +60,7 @@ const UI = {
 };
 
 const el = (id) => document.getElementById(id);
-const state = loadState();
+let state = { registrations: {}, saves: {} };
 
 const chipConfig = [
   { id: "recommended", label: "Recommended" },
@@ -406,95 +130,57 @@ function saveFor(item) {
   return !!state.saves[item.id];
 }
 
-function setSaved(item, isSaved) {
-  const next = loadState();
-  next.saves[item.id] = !!isSaved;
-  saveState(next);
-  state.saves = next.saves;
-  toast(isSaved ? "Saved" : "Removed", isSaved ? "Added to your saved list." : "Removed from saved.", "warn");
-  render();
+async function apiCall(endpoint, payload) {
+  try {
+    const res = await fetch(`/api/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error("API error");
+    state = await res.json();
+    return true;
+  } catch (err) {
+    console.error(err);
+    toast("Error", "Could not connect to backend server.", "bad");
+    return false;
+  }
 }
 
-function registerFree(item, payload) {
-  const next = loadState();
-  next.registrations[item.id] = {
-    id: uid(),
-    itemId: item.id,
-    type: item.type,
-    createdAt: new Date().toISOString(),
-    status: "confirmed",
-    payment: itemIsPaid(item)
-      ? { status: "paid", amount: itemFee(item), receiptId: "rcpt_" + uid().slice(0, 8), email: payload.email || "" }
-      : { status: "not_required", amount: 0 },
-    cancellation: { status: "active" },
-    form: payload,
-  };
-  saveState(next);
-  state.registrations = next.registrations;
+async function setSaved(item, isSaved) {
+  if (await apiCall("save", { itemId: item.id, isSaved })) {
+    toast(isSaved ? "Saved" : "Removed", isSaved ? "Added to your saved list." : "Removed from saved.", "warn");
+    render();
+  }
 }
 
-function applyOpportunity(item, payload) {
-  const next = loadState();
-  next.registrations[item.id] = {
-    id: uid(),
-    itemId: item.id,
-    type: item.type,
-    createdAt: new Date().toISOString(),
-    status: "applied",
-    payment: { status: "not_required", amount: 0 },
-    cancellation: { status: "active" },
-    form: payload,
-  };
-  saveState(next);
-  state.registrations = next.registrations;
+async function registerFree(item, payload) {
+  return await apiCall("register", { item, payload, paymentStatus: "not_required" });
 }
 
-function cancelRegistration(item, reason) {
-  const reg = registrationFor(item);
-  if (!reg) return;
-  const next = loadState();
-  const started = eventStarted(item);
-  const paid = itemIsPaid(item);
-  const refundable = paid && !started;
-
-  next.registrations[item.id] = {
-    ...reg,
-    cancellation: {
-      status: "cancelled_by_user",
-      reason: reason || "User cancelled",
-      at: new Date().toISOString(),
-    },
-    refund: paid
-      ? refundable
-        ? { status: "refunded", amount: itemFee(item), at: new Date().toISOString(), reason: "Cancelled before start" }
-        : { status: "not_applicable", amount: 0, reason: "Event already started" }
-      : { status: "not_required", amount: 0 },
-  };
-  saveState(next);
-  state.registrations = next.registrations;
-  if (paid && refundable) toast("Cancelled", "Registration cancelled. Full refund issued (before start).", "ok");
-  else toast("Cancelled", started ? "Registration cancelled. Refund not possible after start." : "Registration cancelled.", "warn");
+async function applyOpportunity(item, payload) {
+  return await apiCall("apply", { item, payload });
 }
 
-function organizerCancel(item) {
-  const reg = registrationFor(item);
-  if (!reg) return;
-  const next = loadState();
-  const paid = itemIsPaid(item);
-  next.registrations[item.id] = {
-    ...reg,
-    cancellation: {
-      status: "cancelled_by_organizer",
-      reason: "Cancelled by organizer",
-      at: new Date().toISOString(),
-    },
-    refund: paid
-      ? { status: "refunded", amount: itemFee(item), at: new Date().toISOString(), reason: "Organizer cancelled" }
-      : { status: "not_required", amount: 0 },
-  };
-  saveState(next);
-  state.registrations = next.registrations;
-  toast("Organizer cancelled", paid ? "Listing cancelled. Full refund issued automatically." : "Listing cancelled.", "bad");
+async function cancelRegistration(item, reason) {
+  if (await apiCall("cancel", { item, reason, eventStarted: isEvent(item) ? eventStarted(item) : false })) {
+    const reg = state.registrations[item.id];
+    const refund = reg?.refund;
+    if (refund?.status === "refunded") toast("Cancelled", "Registration cancelled. Refund issued.", "ok");
+    else toast("Cancelled", "Registration cancelled.", "warn");
+    render();
+    return true;
+  }
+}
+
+async function organizerCancel(item) {
+  if (await apiCall("cancel", { item, byOrganizer: true })) {
+    const reg = state.registrations[item.id];
+    if (reg?.refund?.status === "refunded") toast("Organizer cancelled", "Listing cancelled. Full refund issued automatically.", "bad");
+    else toast("Organizer cancelled", "Listing cancelled.", "bad");
+    render();
+    return true;
+  }
 }
 
 function toast(title, text, tone = "ok") {
@@ -1182,16 +868,15 @@ function refreshDrawer(item) {
   );
 
   el("sideActionForm").querySelectorAll("[data-cancel]").forEach((b) =>
-    b.addEventListener("click", () => {
-      if (b.dataset.cancel === "user") cancelRegistration(item, "User cancelled via demo UI");
-      if (b.dataset.cancel === "org") organizerCancel(item);
+    b.addEventListener("click", async () => {
+      if (b.dataset.cancel === "user") await cancelRegistration(item, "User cancelled via demo UI");
+      if (b.dataset.cancel === "org") await organizerCancel(item);
       refreshDrawerIfOpen();
-      render();
     }),
   );
 }
 
-function onRegister(item) {
+async function onRegister(item) {
   const isPaid = itemIsPaid(item);
   const name = (el("fullName")?.value || "").trim();
   const email = (el("email")?.value || "").trim();
@@ -1206,17 +891,18 @@ function onRegister(item) {
   const payload = { name, email, teamName: teamName || undefined, teamSize: teamSize || undefined };
 
   if (!isPaid) {
-    registerFree(item, payload);
-    toast("Registration Confirmed", "You’re registered. No payment required.", "ok");
-    refreshDrawerIfOpen();
-    render();
+    if (await registerFree(item, payload)) {
+      toast("Registration Confirmed", "You’re registered. No payment required.", "ok");
+      refreshDrawerIfOpen();
+      render();
+    }
     return;
   }
 
   openPayment(item, payload);
 }
 
-function onApply(item) {
+async function onApply(item) {
   const name = (el("appName")?.value || "").trim();
   const email = (el("appEmail")?.value || "").trim();
   const note = (el("note")?.value || "").trim();
@@ -1229,10 +915,11 @@ function onApply(item) {
   }
 
   const payload = { name, email, resumeFile: resume || "(not uploaded)", note: note || undefined, proposal: proposal || undefined };
-  applyOpportunity(item, payload);
-  toast("Application submitted", "Your application was recorded (demo).", "ok");
-  refreshDrawerIfOpen();
-  render();
+  if (await applyOpportunity(item, payload)) {
+    toast("Application submitted", "Your application was recorded.", "ok");
+    refreshDrawerIfOpen();
+    render();
+  }
 }
 
 function openPayment(item, payload) {
@@ -1353,26 +1040,17 @@ function renderPayScreen(item, payload) {
       </div>
     `;
 
-    const finalize = () => {
+    const finalize = async () => {
       const emailFinal = (el("payEmail").value || email || "").trim();
       const nameFinal = (el("payName").value || name || "").trim();
-      const next = loadState();
-      next.registrations[item.id] = {
-        id: uid(),
-        itemId: item.id,
-        type: item.type,
-        createdAt: new Date().toISOString(),
-        status: "confirmed",
-        payment: { status: "paid", amount: itemFee(item), receiptId, email: emailFinal, name: nameFinal },
-        cancellation: { status: "active" },
-        form: { ...payload, email: emailFinal, name: nameFinal },
-      };
-      saveState(next);
-      state.registrations = next.registrations;
-      toast("Payment Successful", "Registration Confirmed. Receipt sent to registered email.", "ok");
-      closePayment();
-      refreshDrawerIfOpen();
-      render();
+      
+      const payloadForm = { ...payload, email: emailFinal, name: nameFinal };
+      if (await apiCall("register", { item, payload: payloadForm, paymentStatus: "paid", receiptId })) {
+        toast("Payment Successful", "Registration Confirmed. Receipt sent to registered email.", "ok");
+        closePayment();
+        refreshDrawerIfOpen();
+        render();
+      }
     };
 
     back.onclick = () => {
@@ -1384,7 +1062,16 @@ function renderPayScreen(item, payload) {
   }
 }
 
-function init() {
+async function init() {
+  try {
+    const [dRes, sRes] = await Promise.all([fetch("/api/data"), fetch("/api/state")]);
+    DATA = await dRes.json();
+    state = await sRes.json();
+  } catch (err) {
+    console.error("Backend not reachable", err);
+    toast("Network Error", "Could not connect to Python backend.", "bad");
+  }
+
   render();
 
   // Top navigation links
@@ -1505,14 +1192,14 @@ function init() {
   el("closeHelp").addEventListener("click", closeHelp);
   el("closeHelp2").addEventListener("click", closeHelp);
 
-  // Reset demo data
-  el("wipeLocal").addEventListener("click", () => {
-    localStorage.removeItem(STORAGE_KEY);
-    const next = loadState();
-    state.registrations = next.registrations;
-    state.saves = next.saves;
-    toast("Demo reset", "Local demo data cleared.", "ok");
-    render();
+  el("wipeLocal").addEventListener("click", async () => {
+    try {
+      const res = await fetch("/api/reset", { method: "POST" });
+      const data = await res.json();
+      state = data.state;
+      toast("Demo reset", "Backend state cleared.", "ok");
+      render();
+    } catch {}
   });
 }
 

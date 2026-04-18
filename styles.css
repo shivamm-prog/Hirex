@@ -992,6 +992,13 @@ a{ color:inherit; }
   .net-news-card:hover{ transform: none; }
 }
 
+.net-live-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
 .net-req-grid{
   margin-top: 12px;
   display:grid;

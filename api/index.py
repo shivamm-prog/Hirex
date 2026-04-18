@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import os
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__)
 CORS(app)
 
 def daysFromNow(d):
@@ -278,13 +278,7 @@ state_db = {
     "saves": {}
 }
 
-@app.route('/')
-def serve_index():
-    return send_from_directory('.', 'index.html')
 
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('.', path)
 
 @app.route('/api/data', methods=['GET'])
 def get_all_data():
